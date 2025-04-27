@@ -1,5 +1,5 @@
 import streamlit as st
-from components.sidebar import render_sidebar
+import components.sidebar as sidebar
 
 st.set_page_config(
     page_title="GeofisicaCode",
@@ -7,7 +7,7 @@ st.set_page_config(
     layout="centered",
 )
 
-render_sidebar()
+sidebar.show()
 
 st.image("assets/GeofisicaCode.svg", use_container_width=True)
 

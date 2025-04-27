@@ -3,3 +3,9 @@ matplotlib
 streamlit
 streamlit-elements
 pandas
+xlsxwriter
+openpyxl
+plotly
+pdf2image
+Pillow
+stoneforge

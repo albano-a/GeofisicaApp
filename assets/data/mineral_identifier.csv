@@ -1,6 +1,40 @@
-nome,cor,brilho,dureza,fratura,hábito,densidade,magnetismo,diafaneidade
-Quartzo,incolor-violeta,vítreo,7,conchoidal,prismático,2.65,não,opaco-transparente
-Pirita,dourado-preto,metálico,6-6.5,irregular,cúbico,5,não,opaco
-Magnetita,preto,metálico,5.5-6.5,irregular,granular,5.2,sim,opaco-translucido
-Calcita,incolor-branco,vítreo,3,conchoidal,romboédrico,2.7,não,opaco-transparente
-Galena,cinza,metálico,2.5,clivagem cúbica,cúbico,7.4,não,opaco
+nome,cor,brilho,dureza,fratura,hábito,densidade,magnetismo,diafaneidade,sistema cristalino,clivagem
+Quartzo,incolor-violeta,Vítreo,7,conchoidal,prismático,2.65,não,Opaco-Transparente,Romboédrico,Ausente
+Pirita,dourado-preto,Metálico,6-6.5,irregular,cúbico,5,não,Opaco,Isométrico,Imperfeita
+Magnetita,preto,Metálico,5.5-6.5,irregular,granular,5.2,forte,Opaco-Translúcido,Isométrico,Ausente
+Calcita,incolor-branco,Vítreo,3,conchoidal,romboédrico,2.7,não,Opaco-Transparente,Romboédrico,Perfeita
+Galena,cinza,Metálico,2.5,clivagem cúbica,cúbico,7.4,não,Opaco,Isométrico,Perfeita
+Biotita,verde escuro-marrom-preto,Nacarado,2.5-3.5,irregular,agregados escamosos,2.7-3.3,não,Opaco-Transparente-Translúcido,Monoclínico,Perfeita
+Calcopirita,amarelo latão,Metálico,3.5-4,irregular,maciço-botroidal,4.1-4.3,não,Opaco,Tetragonal,Fraca
+Granada,vermelho-verde-marrom,Resinoso-Vítreo,6.5-7.5,conchoidal,granular-compacto-grãos arredondados,3.4-4.3,não,Semitransparente-Transparente,Isométrico,Ausente
+Anfibólio,verde-branco-cinza,Vítreo,5-6,conchoidal,fibras longas e sedosas,2.99-3.03,não,Transparente-Translúcido,Monoclínico,Prismática
+Dolomita,rósea-incolor-branco,Vítreo,3.5-4,subconchoidal,sela-colunares-granulares,2.86-3.36,não,Transparente,Romboédrico,Romboédrica Perfeita
+Diamante,laranja-vermelho-azul claro,Adamantino-Gorduroso,10,conchoidal,cristais-faces e arestas curvadas,3.51-3.52,não,Transparente,Isométrico,Cúbica
+Cromita,preto-cinza amarelado-preto amarronzado,Metálico,5.5,irregular,granular-compacto-maciço,4.5-5.09,fraco,Opaco-Translúcido,Isométrico,Ausente
+Pirolusita,cinza escuro-preto-cinza aço,Metálico,6-6.5,irregular,maciço-reniforme botroidal,4.7-5.19,fraco,Opaco,Tetragonal,Perfeita
+Clorita,vermelho-verde-branco,Nacarado-Vítreo,2-3,irregular-escamosa,micáceo-laminar-foliar,2.6-3,não,Opaco-SemiTransparente-Transparente,Monoclínico,Perfeita
+Topázio,laranja-vermelho-azul claro,Vítreo,8,irregular-conchoidal,prismático,3.5-3.6,não,Opaco-Transparente,Ortorrômbico,Perfeita
+Talco,branco-verde,Fosco-Perláceo-Gorduroso,1,irregular,compacto-fibroso-maciço,2.58-2.83,não,Translúcido,Monoclínico,Perfeita
+Diopsídio,branco-verde claro,Fosco-Vítreo,5.5-6.5,conchoidal-irregular,colunar-lamelar-maciço,3.22-3.38,não,Opaco-Transparente-Translucido,Monoclínico,Boa
+Plagioclásio,vermelho-azul-verde,Nacarado-Vítreo,6-6.5,conchoidal-irregular,agregados divegentes-agregados lamelares-agregados maciços,2.6-2.76,não,Transparente-Translúcido,Triclínico,Perfeita-Muito Boa-Imperfeita
+Turmalina,vermelho-azul-verde,Resinoso-Vítreo,7-7.5,conchoidal-irregular,prismático,2.90-3.41,não,Transparente-Translúcido,Romboédrico,Ausente
+Cianita,azul-verde-branco,Nacarado-Vítreo,4.5-7,cristais colunares-achatados-longos-tabulares,prismático alongado,3.53-3.65,não,Transparente-Translúcido,Triclínico,Perfeita-Boa
+Epidoto,verde-amarelo,Nacarado-Resinoso-Vítreo,6-7,irregular,tabular-prismático,3.35-3.50,não,Opaco-Translúcido,Monoclínico,Perfeita-Imperfeita
+Cassiderita,vermelho-marrom-branco,Metálico-Adamantino-Gorduroso,6-7,irregular-subconchoidal,maciço,6.98-7.01,não,Opaco-Transparente,Tetragonal,Imperfeita-Indistinta
+Illita,branco,Fosco-Terroso,1-2,irregular,agregados finos de cristais foliares ou irregulares,2.6-2.9,não,Fosco-terroso,Monoclínico,Perfeita
+Apatita,azul-verde-branco,Subresinoso-Vítreo,5,conchoidal-irregular,cristais prismático,3.15,não,Transparente-Translúcido,Hexagonal,Fraca
+Bauxita,amarelo avermelhado,Terroso,1-3,irregular,granular-maciço-pulvurulento,2.5-2.6,não,Translúcido,Monoclínico,Ausente
+Esfalerita,verde-marom-branco,Adamantinado-Resinoso,3.5-4,conchoidal-irregular,massas de granulação grossa ou fina,3.9-4.1,não,Opaco-Transparente-Translúcido,Isométrico,Perfeita
+Córidon,laranja-vermelho-azul claro,Adamantinado-Nacarado-Vítreo,9,conchoidal-irregular,maciço-grãos dispersos,3.98-4.10,não,Transparente-Translúcido,Romboédrico,Ausente
+Ouro,branco-prata-amarelo claro,Metálico,2.5-3,serrilhada,massas irregulares-massas dentríticas,19.3,não,Opaco,Isométrico,Ausente
+Berilo,branco-amarelo-azul claro,Resinoso-Vítreo,7.5-8,conchoidal-irregular,prismáticos-colunares,2.63-2.97,não,Transparente-Translúcido,Hexagonal,Imperfeita
+Olivina,verde oliva- preto-castanho,Resinoso-Gorduroso-Vítreo,6.5-7,conchoidal-irregular,maciço,3.22-4.39,não,Transparente-Translúcido,Ortorrômbico,Imperfeita
+Molibdenita,cinza  escuro-cinza azulado-preto,Metálico,1-1.5,irregular,massas foliadas ou escamas-maciço,4.62-4.80,não,Opaco-Translúcido,Hexagonal,Perfeita
+Ilemenita,marrom escuro-preto,Metálico-Submetálico,5-6,conchoidal-subconchoidal,maciço-compacto,4.1-4.9,moderado,Opaco-Translúcido,Romboédrico,Ausente
+Hematita,cinza-preto-cinza aço,Metálico-Fosco-Submetálico,5-6,irregular-subconchoidal,fibroso-radial-agregados fibrosos,5.20-5.26,fraco,Opaco-Transparente,Romboédrico,Ausente
+Gipsita,vermelho-marrom-branco,Nacarado-Subvítreo-Vítreo,1.5-2,conchoidal-estilhaçada,maciço,2.31-2.32,não,Transparente-Translúcido,Monoclínico,Perfeita-Imperfeita
+Fluorita,laranja-vermelho-azul claro,Fosco-Vítreo,4,irregular-subconchoidal,maciço-nodular-botroidal,3.17-3.56,não,Transparente-Translúcido,Isométrico,Perfeita
+Estaurolita,azul-marrom-vermelho escuro,Resinoso-Vítreo,7-7.5,subconchoidal,cristais prismáticos,3.60-3.83,não,Transparente-Translúcido,Monoclínico,Imperfeita
+Espodumênio,verde-branco-amarelo,Nacarado-Vítreo,6.5-7,irregular-subconchoidal,maciço,3.03-3.23,não,Transparente-Translúcido,Monoclínico,Boa-Perfeita
+Barita,vermelho-azul-verde,Nacarado-Resinoso-Vítreo,3-3.5,irregular,cristais bem desenvolvido-tabulares finos,4.5,não,Transparente-Translúcido,Ortorrômbico,Perfeita
+Microclínio,vermelho-azul-verde,Perláceo-Vítreo,6-6.5,irregular,agregados granulares a maciços,2.54-2.63,não,Transparente-Translúcido,Triclínico,Perfeita
