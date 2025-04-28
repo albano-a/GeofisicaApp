@@ -4,8 +4,14 @@ import stoneforge
 
 
 def correct_petrophysic_estimation_range(petrophysics_data):
-    petrophysics_data[petrophysics_data > 1] = 1
-    petrophysics_data[petrophysics_data < 0] = 0
+    if np.isscalar(petrophysics_data):
+        if petrophysics_data > 1:
+            petrophysics_data = 1
+        elif petrophysics_data < 0:
+            petrophysics_data = 0
+    else:
+        petrophysics_data[petrophysics_data > 1] = 1
+        petrophysics_data[petrophysics_data < 0] = 0
 
     return petrophysics_data
 
@@ -31,11 +37,11 @@ def density_porosity(rhob, rhom, rhof):
         or (not is_array and rhom <= rhob)
     ):
         st.warning("Rho_Matriz must be greater than Rho_fluid and Rho_Log", icon="🚨")
-        return np.nan  # Retorna NaN para valores inválidos
+        # return np.nan  # Retorna NaN para valores inválidos
 
     if is_array and any(rhom - rhob > rhom - rhof):
         st.warning("rhob value is lower than rhof", icon="🚨")
-        return np.nan  # Retorna NaN para valores inválidos
+        # return np.nan  # Retorna NaN para valores inválidos
 
     # Cálculo da porosidade
     phi = (rhom - rhob) / (rhom - rhof)
@@ -97,7 +103,7 @@ def sonic_porosity(dt: np.ndarray, dtma: float, dtf: float):
         else:
             phidt = (dt - dtma) / (dtf - dtma)
 
-    phidt = correct_petrophysic_estimation_range(phidt)
+    #phidt = correct_petrophysic_estimation_range(phidt)
     return phidt
 
 
@@ -105,5 +111,5 @@ def gaymard_porosity(phid, phin):
     """Estimate the effective porosity using Gaymard-Poupon [1]_ method."""
     phie = (0.5 * (phid * phid + phin * phin)) ** 0.5
 
-    phie = correct_petrophysic_estimation_range(phie)
+    #phie = correct_petrophysic_estimation_range(phie)
     return phie

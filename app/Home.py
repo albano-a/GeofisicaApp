@@ -1,7 +1,5 @@
 import streamlit as st
-from streamlit_elements import elements, editor, dashboard
 import components.sidebar as sidebar
-import pages.Mineralogia as mineralogia
 
 
 st.set_page_config(
@@ -71,19 +69,19 @@ columns = st.columns(3, gap="small", border=True)
 with columns[0]:
     st.write(
         """
-        ### PetroCalc
+        #### PetroCalc
         """,
         unsafe_allow_html=True,
     )
     st.link_button(
-        "Clique aqui", url="Petrofisica", type="primary", use_container_width=True
+        "Clique aqui", url="PetrofisicaHub", type="primary", use_container_width=True
     )
     # ste.editor().Monaco()
 
 with columns[1]:
     st.write(
         """
-        ### 
+        #### 
         """,
         unsafe_allow_html=True,
     )
@@ -94,7 +92,7 @@ with columns[1]:
 with columns[2]:
     st.write(
         """
-        ### 
+        #### 
         """,
         unsafe_allow_html=True,
     )

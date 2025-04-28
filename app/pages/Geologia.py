@@ -2,7 +2,6 @@ import streamlit as st
 import pandas as pd
 import plotly.graph_objects as go
 import openpyxl
-import plotly.graph_objects as go
 from scripts.pdf_to_png import show_pdf_page_as_image
 
 st.set_page_config(
