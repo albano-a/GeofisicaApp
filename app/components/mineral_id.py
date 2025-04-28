@@ -4,8 +4,13 @@ import pandas as pd
 import streamlit as st
 
 
+@st.cache_data
+def load_data():
+    return pd.read_csv("assets/data/mineral_identifier.csv")
+
+
 def run():
-    df = pd.read_csv("assets/data/mineral_identifier.csv")
+    df = load_data()
 
     # Extract unique colors
     cores_unicas = sorted(

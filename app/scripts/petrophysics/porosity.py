@@ -1,6 +1,5 @@
 import numpy as np
 import streamlit as st
-import stoneforge
 
 
 def correct_petrophysic_estimation_range(petrophysics_data):
@@ -51,10 +50,10 @@ def density_porosity(rhob, rhom, rhof):
     return phi
 
 
-def neutron_porosity(nphi: np.ndarray, vsh: np.ndarray, nphi_sh: float):
-    return stoneforge.petrophysics.porosity.neutron_porosity(
-        nphi=nphi, vsh=vsh, nphi_sh=nphi_sh
-    )
+# def neutron_porosity(nphi: np.ndarray, vsh: np.ndarray, nphi_sh: float):
+#     return stoneforge.petrophysics.porosity.neutron_porosity(
+#         nphi=nphi, vsh=vsh, nphi_sh=nphi_sh
+#     )
 
 
 def neutron_density_porosity(
@@ -103,7 +102,7 @@ def sonic_porosity(dt: np.ndarray, dtma: float, dtf: float):
         else:
             phidt = (dt - dtma) / (dtf - dtma)
 
-    #phidt = correct_petrophysic_estimation_range(phidt)
+    # phidt = correct_petrophysic_estimation_range(phidt)
     return phidt
 
 
@@ -111,5 +110,5 @@ def gaymard_porosity(phid, phin):
     """Estimate the effective porosity using Gaymard-Poupon [1]_ method."""
     phie = (0.5 * (phid * phid + phin * phin)) ** 0.5
 
-    #phie = correct_petrophysic_estimation_range(phie)
+    # phie = correct_petrophysic_estimation_range(phie)
     return phie

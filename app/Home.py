@@ -69,7 +69,7 @@ columns = st.columns(3, gap="small", border=True)
 with columns[0]:
     st.write(
         """
-        #### PetroCalc
+        #### PetrofisicaHub
         """,
         unsafe_allow_html=True,
     )
