@@ -2,8 +2,8 @@
 runOnSave = true
 
 [theme]
-# primaryColor = "#bc1077"
-# backgroundColor = "#14161a"
-# secondaryBackgroundColor = "#222222"
-# textColor = "#ebecf0"
-# font = "sans serif"
+primaryColor = "#bc1077"
+backgroundColor = "#14161a"
+secondaryBackgroundColor = "#222222"
+textColor = "#ebecf0"
+font = "sans serif"
