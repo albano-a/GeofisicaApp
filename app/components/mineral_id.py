@@ -3,54 +3,83 @@ import io
 import pandas as pd
 import streamlit as st
 
+PESOS = {
+    "cor": 1.0,
+    "brilho": 1.5,
+    "fratura": 1.0,
+    "hábito": 1.0,
+    "dureza": 2.0,
+    "densidade": 2.0,
+    "magnetismo": 3.0,
+    "diafaneidade": 1.5,
+    "sistema cristalino": 2.0,
+    "clivagem": 2.0,
+}
+
 
 @st.cache_data
 def load_data():
     return pd.read_csv("assets/data/mineral_identifier.csv")
 
 
+def sort_list(df, column_name):
+    """
+    Sorts and returns a list of unique, lowercase substrings from a specified column in a dataframe.
+    """
+    return sorted(
+        list(set(l.lower() for array in df[column_name] for l in array.split("-")))
+    )
+
+
+def get_property_input(dataframe, property_name, help=None):
+    prop_in = st.selectbox(
+        property_name.capitalize(),
+        options=["Não sei"] + sort_list(dataframe, property_name),
+        help=help,
+    )
+    return prop_in
+
+
+def display_data(results, filter):
+    df_result = pd.DataFrame(results)
+    df_result = df_result[df_result["Match (%)"] > 0]
+    df_result = df_result.sort_values(by="Match (%)", ascending=False)
+
+    def colorize_match(val):
+        if val > 80:
+            return "background-color: #1c3d2b; color: #dffde9"
+        elif val >= 60:
+            return "background-color: #fff2cc; color: #7f6000"
+        else:
+            return "background-color: #f4cccc; color: #990000"
+
+    if not df_result.empty:
+
+        df_result = df_result[df_result["Match (%)"] >= filter]
+
+        df_result_styled = df_result.style.applymap(
+            colorize_match, subset=["Match (%)"]
+        )
+
+        st.success("Minerais compatíveis encontrados:")
+        st.dataframe(df_result_styled)
+
+    else:
+        st.warning("Nenhum mineral encontrado com essas características.")
+
+
 def run():
     df = load_data()
 
-    # Extract unique colors
-    cores_unicas = sorted(
-        list(set(c.lower() for cor in df["cor"] for c in cor.split("-")))
-    )
-
-    # Input fields
-    cor_in = st.selectbox("Cor", options=cores_unicas)
-    brilho_in = st.selectbox(
-        "Brilho",
-        options=["Não sei"]
-        + sorted(list(set(bb for bri in df["brilho"] for bb in bri.split("-")))),
-    )
-    fratura_in = st.selectbox(
-        "Fratura",
-        options=["Não sei"]
-        + sorted(
-            list(set(ff for frat in df["fratura"] for ff in str(frat).split("-")))
-        ),
-    )
-    habito_in = st.selectbox(
-        "Hábito",
-        options=["Não sei"]
-        + sorted(list(set(hh for hab in df["hábito"] for hh in hab.split("-")))),
-    )
-    diafaneidade_in = st.selectbox(
-        "Diafaneidade",
-        options=sorted(
-            list(set(d for diaf in df["diafaneidade"] for d in diaf.split("-")))
-        ),
-        help="Diafaneidade é a propriedade do mineral de reagir a luz.",
-    )
-    sistema_cristalino_in = st.selectbox(
-        "Sistema Cristalino",
-        options=["Não sei"] + sorted(df["sistema cristalino"].dropna().unique()),
-    )
-    clivagem_in = st.selectbox(
-        "Clivagem",
-        options=["Não sei"]
-        + sorted(list(set(cc for cliv in df["clivagem"] for cc in cliv.split("-")))),
+    cor_in = get_property_input(df, property_name="cor")
+    brilho_in = get_property_input(df, property_name="brilho")
+    fratura_in = get_property_input(df, property_name="fratura")
+    habito_in = get_property_input(df, property_name="hábito")
+    diafaneidade_in = get_property_input(df, property_name="diafaneidade")
+    sistema_cristalino_in = get_property_input(df, property_name="sistema cristalino")
+    clivagem_in = get_property_input(
+        df,
+        property_name="clivagem",
         help="Clivagem é a forma como o mineral se divide.",
     )
 
@@ -64,30 +93,20 @@ def run():
     )
 
     st.html("<hr>")
-    usar_densidade = st.checkbox("Considerar densidade?")
+    use_density = st.checkbox("Considerar densidade?")
     dens_in = st.slider("Densidade (g/cm³)", 1.0, 25.0, step=0.1)
 
     st.html("<hr>")
-    usar_magnetismo = st.checkbox("Considerar magnetismo?")
+    use_magnetism = st.checkbox("Considerar magnetismo?")
     magnet_in = st.selectbox(
         "O mineral é magnético?", options=["Não", "Sim", "Não sei"]
     )
 
-    filtrar_60 = st.checkbox("Mostrar apenas resultados com match > 60%")
+    filtrar_50 = st.slider(
+        "Mostrar apenas resultados com match maior que:", 30.0, 100.0, step=0.5
+    )
 
     # Define weights
-    pesos = {
-        "cor": 1,
-        "brilho": 1.5,
-        "fratura": 1,
-        "hábito": 1,
-        "dureza": 2,
-        "densidade": 2,
-        "magnetismo": 3,
-        "diafaneidade": 1.5,
-        "sistema cristalino": 2,
-        "clivagem": 2,
-    }
 
     if st.button("Identificar"):
         resultados = []
@@ -106,46 +125,46 @@ def run():
             # Cor (mandatory)
             total += 1
             if cor_in.lower() in str(row["cor"]).lower():
-                score += pesos["cor"]
+                score += PESOS["cor"]
 
             # Match optional attributes
-            match_and_score("brilho", brilho_in, pesos["brilho"])
-            match_and_score("fratura", fratura_in, pesos["fratura"])
-            match_and_score("hábito", habito_in, pesos["hábito"])
+            match_and_score("brilho", brilho_in, PESOS["brilho"])
+            match_and_score("fratura", fratura_in, PESOS["fratura"])
+            match_and_score("hábito", habito_in, PESOS["hábito"])
             match_and_score(
-                "sistema cristalino", sistema_cristalino_in, pesos["sistema cristalino"]
+                "sistema cristalino", sistema_cristalino_in, PESOS["sistema cristalino"]
             )
-            match_and_score("clivagem", clivagem_in, pesos["clivagem"])
-            match_and_score("diafaneidade", diafaneidade_in, pesos["diafaneidade"])
+            match_and_score("clivagem", clivagem_in, PESOS["clivagem"])
+            match_and_score("diafaneidade", diafaneidade_in, PESOS["diafaneidade"])
 
             # Dureza
             try:
                 min_dur, max_dur = map(float, str(row["dureza"]).split("-"))
-                total += pesos["dureza"]
+                total += PESOS["dureza"]
                 if min_dur <= dureza_in <= max_dur:
-                    score += pesos["dureza"]
+                    score += PESOS["dureza"]
             except:
                 pass
 
             # Densidade
-            if usar_densidade:
+            if use_density:
                 try:
                     min_dens, max_dens = map(float, str(row["densidade"]).split("-"))
-                    total += pesos["densidade"]
+                    total += PESOS["densidade"]
                     if min_dens <= dens_in <= max_dens:
-                        score += pesos["densidade"]
+                        score += PESOS["densidade"]
                 except:
                     pass
 
             # Magnetismo
-            if usar_magnetismo and magnet_in != "Não sei":
-                total += pesos["magnetismo"]
+            if use_magnetism and magnet_in != "Não sei":
+                total += PESOS["magnetismo"]
                 if str(row["magnetismo"]).lower() == magnet_in.lower():
-                    score += pesos["magnetismo"]
+                    score += PESOS["magnetismo"]
 
             # Penalize if color doesn't match
             if cor_in.lower() not in str(row["cor"]).lower():
-                score -= pesos["cor"] * 0.1
+                score -= PESOS["cor"] * 0.1
 
             # Calculate match percentage
             match_pct = (score / total) * 100 if total > 0 else 0
@@ -168,28 +187,4 @@ def run():
             )
 
         # Display results
-        df_result = pd.DataFrame(resultados)
-        df_result = df_result[df_result["Match (%)"] > 0]
-        df_result = df_result.sort_values(by="Match (%)", ascending=False)
-
-        def colorize_match(val):
-            if val > 80:
-                return "background-color: #1c3d2b; color: #dffde9"
-            elif val >= 60:
-                return "background-color: #fff2cc; color: #7f6000"
-            else:
-                return "background-color: #f4cccc; color: #990000"
-
-        if not df_result.empty:
-            if filtrar_60:
-                df_result = df_result[df_result["Match (%)"] >= 60]
-
-            df_result_styled = df_result.style.applymap(
-                colorize_match, subset=["Match (%)"]
-            )
-
-            st.success("Minerais compatíveis encontrados:")
-            st.dataframe(df_result_styled)
-
-        else:
-            st.warning("Nenhum mineral encontrado com essas características.")
+        display_data(results=resultados, filter=filtrar_50)

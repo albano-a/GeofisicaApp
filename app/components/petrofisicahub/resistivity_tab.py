@@ -102,7 +102,7 @@ def render_resistivity():
             """
         )
         st.latex(
-            r"R_{w} = \frac{ R_{we} + 0.131 \cdot 10 ^ {(\frac{1}{\log(\text{BHT}/19.9)} - 2)} }{ -0.5 \cdot R_{we} + 10 ^ {(\frac{0.0426}{\log(\text{BHT}/50.8)})} }"
+            r"R_{w} = \frac{ R_{we} + 0.131 \cdot 10 ^ {\left(\frac{1}{\log(\text{BHT}/19.9)} - 2 \right)} }{ -0.5 \cdot R_{we} + 10 ^ {\left(\frac{0.0426}{\log(\text{BHT}/50.8)}\right)} }"
         )
 
         cols = st.columns(2)
@@ -130,28 +130,175 @@ def render_resistivity():
                 st.warning(f"Ocorreu um erro: {e}")
 
         list_western_atlas_tabs = [
-            r"Resistividade Equivalente da Água ($R_{we}$)",
-            r"Resistividade do Filtrado de Lama ($R_{mf}$)",
+            r"Res. Equivalente da Água ($R_{we}$)",
+            r"Res. do Filtrado de Lama ($R_{mf}$)",
             r"Temperatura da Formação ($T_{f}$)",
         ]
-        
+
         wes_at_tabs = st.tabs(list_western_atlas_tabs)
-        
+
         with wes_at_tabs[0]:
-            st.latex(
-                r"R_{we} = R_{mf} \cdot 10^{ {SP}/{61 + 0.133\text{BHT}}}"
+            st.latex(r"R_{we} = R_{mf} \cdot 10^{ {SP}/{61 + 0.133\text{BHT}}}")
+            st.write(
+                r"""
+                $R_{mf}$ - Resistividade do Filtrado de Lama na Temperatura da Formação  
+                $\text{BHT}$ - Temperatura no Fundo do Poço (Bottom Hole Temperature)  
+                $SP$ - Medida do Potencial Espontâneo
+                """
             )
+            cols = st.columns(3)
+            with cols[0]:
+                rmf = st.number_input("$R_{mf}$ (ohm-m)", min_value=0.00, key="rmf_rwe")
+            with cols[1]:
+                bht = st.number_input(
+                    r"$\text{BHT}$ (ºF)", min_value=0.00, key="bht_rwe"
+                )
+            with cols[2]:
+                sp = st.number_input("$SP$ (mV)", min_value=0.00, key="sp_rwe")
+
+            if st.button("Calcular", key="western_atlas_2"):
+                try:
+                    rwe = rmf * 10 ** (sp / (61 + 0.133 * bht))
+                    st.metric(
+                        "Resistividade Equivalente da Água", value=f"{rwe:.4f} ohm-m"
+                    )
+                except Exception as e:
+                    st.warning(f"Ocorreu um erro: {e}")
+
+        with wes_at_tabs[1]:
+            st.latex(r"R_{mf} = \frac{R_{mfsurf}(T_{surf}+6.77)}{T_{f} + 6.77}")
+            st.write(
+                r"""
+                $R_{mf}$ - Resistividade do filtrado de lama na temperatura da formação
+                $R_{mfsurf}$ - Resistividade do filtrado de lama na temperatura medida
+                $T_{surf}$ - Temperatura na qual a R_{mf} foi medida (temperatura superficial)
+                $T_{f}$ - Temperatura da Formação
+                """
+            )
+            cols = st.columns(3)
+            with cols[0]:
+                rmfsurf = st.number_input(
+                    "$R_{mfsurf}$ (ohm-m)", min_value=0.00, key="rmfsurf_rmf"
+                )
+            with cols[1]:
+                tsurf = st.number_input(
+                    r"$T_{surf}$ (ºC)", min_value=0.00, key="tsurf_rmf"
+                )
+            with cols[2]:
+                tf = st.number_input("$SP$ (mV)", min_value=0.00, key="tf_rmf")
+
+            if st.button("Calcular", key="wester_atlas_3"):
+                try:
+                    rmf = (rmfsurf * (tsurf + 6.77)) / (tf + 6.77)
+                    st.metric(
+                        "Resistividade Equivalente da Água", value=f"{rmf:.4f} ohm-m"
+                    )
+                except Exception as e:
+                    st.warning(f"Ocorreu um erro: {e}")
+        with wes_at_tabs[2]:
+            st.latex(r"T_{f} = \left(\frac{BHT - AMST}{TD} \cdot FD \right) + AMST")
             st.write(
                 """
-                - $R_{mf}$ - Resistividade do Filtrado de Lama na Temperatura da Formação
-                - $\text{BHT}$ - Temperatura no Fundo do Poço
-                - $SP$ - Medida do Potencial Espontâneo
+                $AMST$ - Temperatura Superficial Anual Média  
+                $TD$ - Profundidade Total  
+                $BHT$ - Temperatura no Fundo do Poço  
+                $T_{f}$ - Temperatura da Formação  
+                $FD$ - Profundidade da Formação  
                 """
             )
-            
-        with wes_at_tabs[1]:
-            st.write()
-        with wes_at_tabs[2]:
-            st.write()
-            
-            
+            cols = st.columns(2)
+
+            with cols[0]:
+                bht = st.number_input(r"$\text{BHT}$ (ºF)", key="bht_tf")
+                td = st.number_input(r"$TD$ (ft)", min_value=0.00)
+            with cols[1]:
+                amst = st.number_input(r"$AMST$ (ºF)")
+                fd = st.number_input(r"$FD$ ft", min_value=0.00)
+
+            if st.button("Calcular", key="calculate_tf"):
+                try:
+                    tf = ((bht - amst) / td * fd) + amst
+                    st.metric("Temperatura de Formação", value=f"{tf:.2f} ºF")
+                except:
+                    print("An exception occurred")
+
+    with st.expander("Resistividade da Água - Perfil SP"):
+        st.write(
+            """
+            Resistividade da água (Rw) também pode ser calculada a partir do registro de potencial espontâneo (SP) do poço. Essa equação requer os valores da resistividade do filtrado de lama, uma medição de SP e uma constante K que depende da temperatura da formação. A equação é a seguinte:
+            """
+        )
+        st.latex(r"R_w = 10^{(K \cdot \log(R_{mf}) + SP) / K}")
+        st.write(
+            r"""
+            Onde:
+            $R_{w}$ - Resistividade da Água
+            $R_{mf}$ - Resistividade do Filtrado de Lama na Temperatura da Formação
+            $K$ - Constante
+            $SP$ - Potencial Espontâneo
+            """
+        )
+        cols = st.columns(3)
+        with cols[0]:
+            k_input = st.number_input("$K$", min_value=0.00)
+        with cols[1]:
+            rmf_input = st.number_input("$R_{mf}$", min_value=0.01)
+        with cols[2]:
+            sp_input = st.number_input("$SP$", min_value=0.00)
+
+        if st.button("Calculate", key="sp-log"):
+            k = k_input
+            rmf = rmf_input
+            sp = sp_input
+            try:
+                rw_output = 10 ** ((k * np.log10(rmf) + sp) / k)
+                st.metric("Resistividade da Água", value=f"{rw_output:.4f} ohm-m")
+            except Exception as e:
+                st.error(f"Um erro ocorreu: {e}")
+
+        k_tab = st.tabs(["Constante $K$"])
+        with k_tab[0]:
+            st.write(
+                """
+                Para o cálculo da constante K, é necessário conhecer a temperatura da formação, e a expressão é a seguinte:
+                """
+            )
+            st.latex(r"K = (0.133 \cdot T_{f}) + 60")
+            st.write("$T_{f}$ - Temperatura da Formação")
+
+            cols = st.columns(3)
+            with cols[1]:
+                tf = st.number_input("$T_{f} (ºF)$", min_value=0.00)
+
+            if st.button("Calcular", key="sp-log-tf"):
+                try:
+                    K = (0.133 * tf) + 60
+                    st.metric("Constante K", value=f"{K}")
+                except:
+                    print("An exception occurred")
+
+    with st.expander("Resistividade Total"):
+        st.write(
+            r"""
+            A resistividade total ($R_t$) pode ser calculada pela equação de Archie. Essa equação é composta pelos valores de resistividade da água ($R_w$), fator de tortuosidade ($a$), porosidade ($\phi$), e os expoentes de cementação ($m$) e saturação ($n$). A expressão é a seguinte:
+            """
+        )
+        st.latex(r"R_{t} = \frac{ a \cdot R_{w} }{ \phi^{m} \cdot S_{w}^{n}}")
+
+        cols = st.columns(3)
+        with cols[0]:
+            rw = st.number_input("$R_{w}$", min_value=0.00)
+            a = st.number_input("$a$", min_value=0.00)
+        with cols[1]:
+            phi = st.number_input(r"$\phi$", min_value=0.00)
+            m = st.number_input("$m$", min_value=0.00)
+        with cols[2]:
+            sw = st.number_input("$S_{w}$", min_value=0.00)
+            n = st.number_input("$n$", min_value=0.00)
+
+        if st.button("Calcular", key="total_resistivity"):
+            try:
+                rt = (a * rw) / ((phi**m) * (sw**n))
+                st.metric("Resistividade Total", value=f"{rt:.4f}")
+            except Exception as e:
+                st.error(f"Um erro ocorreu: {e}")
