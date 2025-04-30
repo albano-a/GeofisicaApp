@@ -18,13 +18,14 @@ st.set_page_config(
 
 sidebar.show()
 
-st.image("assets/GeofisicaApp.svg", use_container_width=True)
+st.title("Beta - O site ainda está em desenvolvimento")
+# st.image("assets/GeofisicaApp.svg", use_container_width=True)
 
-st.subheader("Conteúdos e Aplicativos da Geofísica")
+st.title("GeofísicaApp")
 
 st.write(
     """
-         Explore os conteúdos abaixo:
+    Explore os conteúdos abaixo:
          """
 )
 
@@ -81,7 +82,7 @@ with columns[0]:
 with columns[1]:
     st.write(
         """
-        #### 
+        #### Cálculo
         """,
         unsafe_allow_html=True,
     )
@@ -92,7 +93,7 @@ with columns[1]:
 with columns[2]:
     st.write(
         """
-        #### 
+        #### Física
         """,
         unsafe_allow_html=True,
     )

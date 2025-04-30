@@ -27,7 +27,6 @@ INPUT_OPTIONS = {
         "Amarelo Claro",
         "Amarelo Latão",
         "Vermelho",
-        "Verde",
         "Azul",
         "Azul Claro",
         "Cinza Escuro",
@@ -155,7 +154,7 @@ def display_data(results, filter):
     df_result = df_result.sort_values(by="Match (%)", ascending=False)
 
     def colorize_match(val):
-        if val > 75:
+        if val >= 75:
             return "background-color: #1c3d2b; color: #dffde9"
         elif val >= 50:
             return "background-color: #fff2cc; color: #7f6000"
