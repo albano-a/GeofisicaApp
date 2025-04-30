@@ -363,6 +363,7 @@ with tab4:
 with tab5:
     st.header("Identificador de Minerais")
 
-    st.subheader("Escolha as propriedades observadas:")
+    st.write("Escolha as propriedades observadas:")
+    st.html("<hr>")
 
     mineral_id.run()
