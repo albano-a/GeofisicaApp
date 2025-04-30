@@ -198,7 +198,6 @@ def algorithm(df, weights, props: list):
     ]
     prop_map = dict(zip(attr_keys, props))
 
-    print(df["classificação"])
 
     
     def match_categorical(row_val, input_val):
@@ -304,7 +303,7 @@ def run():
     )
     dureza_in = st.slider(
         "Dureza (escala Mohs)",
-        1.0,
+        0.0,
         10.0,
         step=0.5,
         help="Dureza é a resistência do mineral à abrasão",
@@ -320,7 +319,7 @@ def run():
             property_name=(
                 "hábitos individuais"
                 if tipo_habito == "Cristais Individuais"
-                else "hábitos_agregados"
+                else "hábitos agregados"
             ),
             key="hab_input_1"
         )
@@ -329,7 +328,7 @@ def run():
             property_name=(
                 "hábitos individuais"
                 if tipo_habito == "Cristais Individuais"
-                else "hábitos_agregados"
+                else "hábitos agregados"
             ),
             key="hab_input_2",
         )
@@ -338,7 +337,7 @@ def run():
             property_name=(
                 "hábitos individuais"
                 if tipo_habito == "Cristais Individuais"
-                else "hábitos_agregados"
+                else "hábitos agregados"
             ),
             key="hab_input_3",
         )
@@ -373,6 +372,9 @@ def run():
     ]
 
     if st.button("Identificar"):
-        resultados = algorithm(df, weights=PESOS, props=list_of_widgets)
+        if dureza_in == 0.0:
+            st.error("Dureza é necessária.")
+        else:
+            resultados = algorithm(df, weights=PESOS, props=list_of_widgets)
 
-        display_data(results=resultados, filter=filtrar_valores)
+            display_data(results=resultados, filter=filtrar_valores)
