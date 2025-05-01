@@ -2,17 +2,16 @@ import streamlit as st
 import pandas as pd
 import plotly.graph_objects as go
 import openpyxl
-from scripts.pdf_to_png import show_pdf_page_as_image
-import components.sidebar as sidebar
 
-st.set_page_config(
+from components.header import render_header
+
+render_header(
     page_title="GeologiHub",
     page_icon="assets/geofisicahub_favicons.svg",
     layout="centered",
 )
-sidebar.show()
 
-st.image("assets/GeologiHub.png",use_container_width=True, output_format="PNG")
+st.image("assets/GeologiHub.png", use_container_width=True, output_format="PNG")
 
 st.header("Tabela Cronoestratigráfica")
 

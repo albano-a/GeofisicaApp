@@ -2,7 +2,7 @@ import streamlit as st
 import math
 import matplotlib.pyplot as plt
 import numpy
-import components.sidebar as sidebar
+from components.header import render_header
 from components.geofisicacode.basic_tab import render_base
 from components.geofisicacode.math_tab import render_math
 from components.geofisicacode.random_tab import render_random
@@ -10,13 +10,19 @@ from components.geofisicacode.numpy_tab import render_numpy
 from components.geofisicacode.matplotlib_tab import render_matplotlib
 from components.geofisicacode.pandas_tab import render_pandas
 
-st.set_page_config(
+render_header(
     page_title="GeofisicaCode",
     page_icon="assets/geofisicacode_favicons.svg",
     layout="wide",
+    menu_items={
+        "About": """
+        Esse aplicativo faz parte do ecossistema
+        do GeofisicaHub.
+        
+        #### Desenvolvido por André Albano
+        """
+    },
 )
-
-sidebar.show()
 
 st.image("assets/GeofisicaCode.svg", width=600, output_format="PNG")
 
@@ -47,4 +53,3 @@ with tabs_geofisicacode[4]:
 
 with tabs_geofisicacode[5]:
     render_pandas()
-

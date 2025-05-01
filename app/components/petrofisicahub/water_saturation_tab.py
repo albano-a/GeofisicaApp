@@ -1,6 +1,6 @@
 import streamlit as st
 import numpy as np
-from numpy import sqrt
+from sympy import symbols, sqrt, simplify
 
 
 def render_water_saturation():
@@ -240,5 +240,213 @@ def render_water_saturation():
                     except Exception as e:
                         st.error(f"An error occurred: {e}")
 
-    with st.expander("Water Saturation ($S_w$) - Ferlt, Schlumberger and Simandoux"):
-        pass
+    with st.expander("Water Saturation ($S_w$) - Simandoux, Ferlt, and Schlumberger"):
+        author_radio = st.radio(
+            "Select the author:",
+            horizontal=True,
+            options=["Simandoux", "Schlumberger", "Ferlt"],
+        )
+
+        if author_radio == "Simandoux":
+
+            key_simandoux = "rw_simandoux"
+            st.write(
+                """
+                Another well known equation to calculate water saturation is Simandoux's equation (1963). This uses the same parameters used in other equations from other authors (e.g. Schlumberger, Ferlt, etc.), like shale volume, porosity, water resistivity, true formation resistivity, and shale/clay resistivity. The equation expression is the following:
+                """
+            )
+            st.latex(
+                r"""
+                S_w = \left(\frac{0.4 \cdot R_w}{\phi^{2}} \right) \cdot \left[  \sqrt{(\frac{V_{shale}}{R_{sh}}) + \frac{5\phi^{2}}{R_{t}R_{w}}} - \frac{V_{shale}}{R_{sh}}  \right]
+                """
+            )
+            st.write(
+                r"""
+                Where:  
+                $S_{w}$ - Water saturation of the uninvaded zone  
+                $R_{t}$ - True formation resistivity (i.e., deep induction or deep laterolog corrected for invasion)  
+                $R_{w}$ - Resistivity of formation water at formation temperature  
+                $\phi$ - Porosity  
+                $V_{shale}$ - Shale volume  
+                $R_{shale}$ - Shale/clay resistivity value in a formation  
+                """
+            )
+            cols = st.columns(3)
+            with cols[0]:
+                rw = st.number_input(
+                    "$R_{w}$ (ohm-m)", min_value=0.00, key=key_simandoux * 1
+                )
+                vsh = st.number_input(
+                    "$V_{shale}$ (decimal)",
+                    min_value=0.00,
+                    max_value=1.00,
+                    key=key_simandoux + "2",
+                )
+            with cols[1]:
+                phi = st.number_input(
+                    r"$\phi$ (decimal)",
+                    min_value=0.00,
+                    max_value=1.00,
+                    key=key_simandoux + "3",
+                )
+                rsh = st.number_input(
+                    "$R_{shale}$ (ohm-m)", min_value=0.00, key=key_simandoux + "4"
+                )
+            with cols[2]:
+                rt = st.number_input("$R_{t}$", min_value=0.00, key=key_simandoux + "5")
+
+            if st.button("Calculate", key=key_simandoux + "6"):
+                try:
+                    external_eq = (0.4 * rw) / (phi**2)
+                    root_1 = (vsh / rsh) ** 2
+                    root_2 = (5 * phi**2) / (rt * rw)
+                    sw = external_eq * (np.sqrt(root_1 + root_2) - (vsh / rsh))
+                    if 0 <= sw <= 1:
+                        st.metric("Water Saturation", value=f"{sw:.4g} | {sw*100:.2f}%")
+                    else:
+                        st.warning(
+                            f"The value must be between 0 and 1, right now it's {sw}"
+                        )
+                except Exception as e:
+                    st.write(f"An error occurred: {e}")
+
+        elif author_radio == "Schlumberger":
+            key_slb = "sw_schlumberger"
+            st.write(
+                """
+                Schlumberger (1975) also proposed an equation to calculate water saturation. The parameters involved are similar to those in Ferlt's (1975) equation—such as shale volume, porosity, water resistivity, and true formation resistivity—but with one key addition: the resistivity of shale or clay. The equation is shown below:
+                """
+            )
+            st.latex(
+                r"""
+                S_w = 
+                \frac{\sqrt{
+                \left(\frac{V_{\text{shale}}}{R_{\text{sh}}}\right)^2 + \frac{\phi^2}{0.2 \cdot R_w \cdot R_t \cdot (1 - V_{\text{shale}})} - \frac{V_{\text{shale}}}{R_{\text{sh}}}
+                }}{
+                \frac{\phi^2}{0.4 \cdot R_w \cdot (1 - V_{\text{shale}})}
+                }
+                """
+            )
+            st.write(
+                """
+                Where:  
+                $S_w$ - water saturation of the uninvaded zone  
+                $R_t$ - true formation resistivity (i.e., deep induction or deep laterolog corrected for invasion)  
+                $R_w$ - resistivity of formation water at formation temperature  
+                $\phi$  - porosity  
+                $V_{shale}$ - shale volume  
+                $R_{shale}$ - shale/clay resistivity value in a formation  
+                """
+            )
+
+            cols = st.columns(3)
+            with cols[0]:
+                rw = st.number_input("$R_{w}$ (ohm-m)", min_value=0.00, key=key_slb * 1)
+                vsh = st.number_input(
+                    "$V_{shale}$ (decimal)",
+                    min_value=0.00,
+                    max_value=1.00,
+                    key=key_slb + "2",
+                )
+            with cols[1]:
+                phi = st.number_input(
+                    r"$\phi$ (decimal)",
+                    min_value=0.00,
+                    max_value=1.00,
+                    key=key_slb + "3",
+                )
+                rsh = st.number_input(
+                    "$R_{shale}$ (ohm-m)", min_value=0.00, key=key_slb + "4"
+                )
+            with cols[2]:
+                rt = st.number_input("$R_{t}$", min_value=0.00, key=key_slb + "5")
+
+            if st.button("Calculate", key=key_slb + "6"):
+                try:
+                    # numerator
+                    term1 = (vsh / rsh) ** 2
+                    term2 = (phi**2) / (0.2 * rw * rt * (1 - vsh))
+                    term3 = vsh / rsh
+                    num = term1 + term2 - term3
+                    # denominator
+                    den = (phi**2) / (0.4 * rw * (1 - vsh))
+
+                    sw = num / den
+                    if 0 <= sw <= 1:
+                        st.metric("Water Saturation", value=f"{sw:.4g} | {sw*100:.2f}%")
+                    else:
+                        st.warning(
+                            f"The value must be between 0 and 1, right now it's {sw}"
+                        )
+                except Exception as e:
+                    st.write(f"An error occurred: {e}")
+
+        elif author_radio == "Ferlt":
+            key_ferlt = "sw_ferlt"
+            st.write(
+                """
+                One of the equations used to calculate water saturation is Ferlt's equation (1975). It incorporates porosity, water resistivity, true formation resistivity, shale volume, and a constant "a", whose value is known for specific geological zones. The equation is as follows:
+                """
+            )
+            st.latex(
+                r"""
+                S_w = \frac{1}{\phi} \cdot \left(
+                {
+                    \sqrt{
+                        \frac{R_w}{R_t} + \left(\frac{a \cdot V_{shale}}{2}\right)^{2}    
+                    } - 
+                    \frac{a \cdot V_{shale}}{2}
+                }\right)
+                """
+            )
+            st.write(
+                r"""
+                Where:  
+                $S_w$ - Water saturation of the uninvaded zone  
+                $R_t$ - True formation resistivity (i.e., deep induction or deep laterolog corrected for invasion)  
+                $R_w$ - Resistivity of formation water at formation temperature  
+                $\phi$ - Porosity  
+                $V_{shale}$ - Shale volume  
+                $a$ - $0.25$ at the Golf Coast  
+                $a$ - $0.35$ at the Rocky Mountains
+                """
+            )
+
+            cols = st.columns(3)
+            with cols[0]:
+                rw = st.number_input(
+                    "$R_{w}$ (ohm-m)", min_value=0.00, key=key_ferlt * 1
+                )
+                vsh = st.number_input(
+                    "$V_{shale}$ (decimal)",
+                    min_value=0.00,
+                    max_value=1.00,
+                    key=key_ferlt + "2",
+                )
+            with cols[1]:
+                phi = st.number_input(
+                    r"$\phi$ (decimal)",
+                    min_value=0.00,
+                    max_value=1.00,
+                    key=key_ferlt + "3",
+                )
+                a = st.number_input("$a$", min_value=0.00, key=key_ferlt + "4")
+            with cols[2]:
+                rt = st.number_input("$R_{t}$", min_value=0.00, key=key_ferlt + "5")
+
+            if st.button("Calculate", key=key_ferlt + "6"):
+                try:
+                    root1 = (rw / rt)
+                    root2 = ((a * vsh) / 2) ** 2
+                    term1 = np.sqrt(root1 + root2)
+                    term2 = (a * vsh) / 2
+
+                    sw = (1 / phi) * (term1 - term2)
+                    if 0 <= sw <= 1:
+                        st.metric("Water Saturation", value=f"{sw:.4g} | {sw*100:.2f}%")
+                    else:
+                        st.warning(
+                            f"The value must be between 0 and 1, right now it's {sw}"
+                        )
+                except Exception as e:
+                    st.write(f"An error occurred: {e}")

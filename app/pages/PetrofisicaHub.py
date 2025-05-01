@@ -10,12 +10,13 @@ from components.petrofisicahub.water_saturation_tab import render_water_saturati
 from components.petrofisicahub.shale_volume_tab import render_shale_volume
 from components.petrofisicahub.oil_reserves_tab import render_oil_reserves
 
-st.set_page_config(
+from components.header import render_header
+
+render_header(
     page_title="PetrofisicaHub",
     page_icon="assets/geofisicahub_favicons.svg",
     layout="centered",
 )
-sidebar.show()
 
 st.image("assets/PetrofisicaHub.png", use_container_width=True, output_format="PNG")
 

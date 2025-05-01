@@ -1,9 +1,7 @@
 import streamlit as st
-import components.sidebar as sidebar
-import matplotlib.pyplot as plt
-import numpy as np
+from components.header import render_header
 
-st.set_page_config(
+render_header(
     page_title="GeofisicaApp",
     page_icon="assets/geofisicahub_favicons.svg",
     layout="centered",
@@ -16,8 +14,6 @@ st.set_page_config(
         """
     },
 )
-
-sidebar.show()
 
 st.image("assets/GeofisicaApp_beta.png", use_container_width=True)
 st.info(
