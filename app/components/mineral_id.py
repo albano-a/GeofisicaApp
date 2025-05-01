@@ -294,7 +294,7 @@ def run():
     diafaneidade_in = get_property_input(property_name="diafaneidade")
     sistema_cristalino_in = get_property_input(property_name="sistema cristalino")
 
-    st.html("<hr>")
+    st.divider()
     st.subheader("Propriedades Físicas")
     clivagem_in = get_property_input(
         property_name="clivagem",

@@ -105,7 +105,7 @@ fig.update_layout(
 
 st.plotly_chart(fig)
 
-st.markdown("---")
+st.divider()
 
 st.header("Conversor de Idades")
 

@@ -4,13 +4,13 @@ import components.mineral_id as mineral_id
 import components.sidebar as sidebar
 
 st.set_page_config(
-    page_title="Mineralogia",
+    page_title="MineralHub",
     page_icon="assets/geofisicahub_favicons.svg",
     layout="centered",
 )
 sidebar.show()
 
-st.title("Mineralogia")
+st.title("MineralHub")
 st.write(
     """
 Bem-vindo à página de Mineralogia! Aqui você encontrará apps e ferramentas relacionadas ao estudo dos minerais, suas propriedades, classificações e aplicações.
@@ -364,6 +364,6 @@ with tab5:
     st.header("Identificador de Minerais")
 
     st.write("Escolha as propriedades observadas:")
-    st.html("<hr>")
+    st.divider()
 
     mineral_id.run()

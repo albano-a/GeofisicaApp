@@ -1,6 +1,7 @@
 import streamlit as st
 import components.sidebar as sidebar
-
+import matplotlib.pyplot as plt
+import numpy as np
 
 st.set_page_config(
     page_title="GeofisicaApp",
@@ -19,12 +20,16 @@ st.set_page_config(
 sidebar.show()
 
 st.image("assets/GeofisicaApp_beta.png", use_container_width=True)
-st.info("Estamos trabalhando para lançar este site em breve.", icon=":material/construction:")
+st.info(
+    "Estamos trabalhando para lançar este site em breve.",
+    icon=":material/construction:",
+)
 st.write(
     """
     Explore os conteúdos disponíveis abaixo:
     """
 )
+
 
 columns = st.columns(3, gap="small", border=True)
 
@@ -41,9 +46,9 @@ with columns[0]:
         type="primary",
         icon=":material/public:",
         use_container_width=True,
-        disabled=True
+        disabled=True,
     )
-    
+
 
 with columns[1]:
     st.write(
@@ -63,12 +68,16 @@ with columns[1]:
 with columns[2]:
     st.write(
         """
-        #### Mineralogia
+        #### MineralHub
         """,
         unsafe_allow_html=True,
     )
     st.link_button(
-        "Clique aqui", url="Mineralogia", type="primary", icon=":material/diamond:", use_container_width=True
+        "Clique aqui",
+        url="MineralHub",
+        type="primary",
+        icon=":material/diamond:",
+        use_container_width=True,
     )
     # ste.editor().Monaco()
 

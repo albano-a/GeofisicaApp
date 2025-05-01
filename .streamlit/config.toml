@@ -2,6 +2,7 @@
 runOnSave = true
 
 [theme]
+base="dark"
 primaryColor = "#bc1077"
 backgroundColor = "#14161a"
 secondaryBackgroundColor = "#222222"
