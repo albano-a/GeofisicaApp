@@ -18,15 +18,12 @@ st.set_page_config(
 
 sidebar.show()
 
-st.title("Beta - O site ainda está em desenvolvimento")
-# st.image("assets/GeofisicaApp.svg", use_container_width=True)
-
-st.title("GeofísicaApp")
-
+st.image("assets/GeofisicaApp_beta.png", use_container_width=True)
+st.info("Estamos trabalhando para lançar este site em breve.", icon=":material/construction:")
 st.write(
     """
-    Explore os conteúdos abaixo:
-         """
+    Explore os conteúdos disponíveis abaixo:
+    """
 )
 
 columns = st.columns(3, gap="small", border=True)
@@ -34,14 +31,19 @@ columns = st.columns(3, gap="small", border=True)
 with columns[0]:
     st.write(
         """
-        #### Mineralogia
+        <h4 style="color:#6a6c70">GeofísicaCode</h4>
         """,
         unsafe_allow_html=True,
     )
     st.link_button(
-        "Clique aqui", url="Mineralogia", type="primary", use_container_width=True
+        "Clique aqui",
+        url="Geologia",
+        type="primary",
+        icon=":material/public:",
+        use_container_width=True,
+        disabled=True
     )
-    # ste.editor().Monaco()
+    
 
 with columns[1]:
     st.write(
@@ -51,19 +53,24 @@ with columns[1]:
         unsafe_allow_html=True,
     )
     st.link_button(
-        "Clique aqui", url="Geologia", type="primary", use_container_width=True
+        "Clique aqui",
+        url="Geologia",
+        type="primary",
+        icon=":material/layers:",
+        use_container_width=True,
     )
 
 with columns[2]:
     st.write(
         """
-        #### GeofisicaCode
+        #### Mineralogia
         """,
         unsafe_allow_html=True,
     )
     st.link_button(
-        "Clique aqui", url="Geologia", type="primary", use_container_width=True
+        "Clique aqui", url="Mineralogia", type="primary", icon=":material/diamond:", use_container_width=True
     )
+    # ste.editor().Monaco()
 
 columns = st.columns(3, gap="small", border=True)
 
@@ -75,28 +82,42 @@ with columns[0]:
         unsafe_allow_html=True,
     )
     st.link_button(
-        "Clique aqui", url="PetrofisicaHub", type="primary", use_container_width=True
+        "Clique aqui",
+        url="PetrofisicaHub",
+        type="primary",
+        icon=":material/stacked_line_chart:",
+        use_container_width=True,
     )
     # ste.editor().Monaco()
 
 with columns[1]:
     st.write(
         """
-        #### Cálculo
+        <h4 style="color:#6a6c70">Cálculo</h4>
         """,
         unsafe_allow_html=True,
     )
     st.link_button(
-        "Clique aqui", url="Geologia", type="primary", use_container_width=True
+        "Clique aqui",
+        url="",
+        type="primary",
+        icon=":material/functions:",
+        use_container_width=True,
+        disabled=True,
     )
 
 with columns[2]:
     st.write(
         """
-        #### Física
+        <h4 style="color:#6a6c70">Física</h4>
         """,
         unsafe_allow_html=True,
     )
     st.link_button(
-        "Clique aqui", url="Geologia", type="primary", use_container_width=True
+        "Clique aqui",
+        url="",
+        type="primary",
+        icon=":material/orbit:",
+        use_container_width=True,
+        disabled=True,
     )
