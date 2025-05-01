@@ -17,7 +17,7 @@ st.set_page_config(
 )
 sidebar.show()
 
-st.title("PetrofisicaHub")
+st.image("assets/PetrofisicaHub.png", use_container_width=True, output_format="PNG")
 
 tabs_list = [
     "Porosidade",

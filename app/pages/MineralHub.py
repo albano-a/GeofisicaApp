@@ -10,7 +10,7 @@ st.set_page_config(
 )
 sidebar.show()
 
-st.title("MineralHub")
+st.image("assets/MineralHub.png", use_container_width=True, output_format="PNG")
 st.write(
     """
 Bem-vindo à página de Mineralogia! Aqui você encontrará apps e ferramentas relacionadas ao estudo dos minerais, suas propriedades, classificações e aplicações.

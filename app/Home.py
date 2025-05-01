@@ -36,30 +36,29 @@ columns = st.columns(3, gap="small", border=True)
 with columns[0]:
     st.write(
         """
-        <h4 style="color:#6a6c70">GeofísicaCode</h4>
+        #### GeofísicaCode
         """,
         unsafe_allow_html=True,
     )
     st.link_button(
         "Clique aqui",
-        url="Geologia",
+        url="GeofisicaCode",
         type="primary",
         icon=":material/public:",
         use_container_width=True,
-        disabled=True,
     )
 
 
 with columns[1]:
     st.write(
         """
-        #### Geologia
+        #### GeologiHub
         """,
         unsafe_allow_html=True,
     )
     st.link_button(
         "Clique aqui",
-        url="Geologia",
+        url="GeologiHub",
         type="primary",
         icon=":material/layers:",
         use_container_width=True,
@@ -102,13 +101,13 @@ with columns[0]:
 with columns[1]:
     st.write(
         """
-        <h4 style="color:#6a6c70">Cálculo</h4>
+        <h4 style="color:#6a6c70">CalcHub</h4>
         """,
         unsafe_allow_html=True,
     )
     st.link_button(
         "Clique aqui",
-        url="",
+        url="CalcHub",
         type="primary",
         icon=":material/functions:",
         use_container_width=True,
@@ -118,13 +117,13 @@ with columns[1]:
 with columns[2]:
     st.write(
         """
-        <h4 style="color:#6a6c70">Física</h4>
+        <h4 style="color:#6a6c70">FisicaHub</h4>
         """,
         unsafe_allow_html=True,
     )
     st.link_button(
         "Clique aqui",
-        url="",
+        url="FisicaHub",
         type="primary",
         icon=":material/orbit:",
         use_container_width=True,
