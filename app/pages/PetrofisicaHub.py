@@ -20,13 +20,15 @@ render_header(
 
 st.image("assets/PetrofisicaHub.png", use_container_width=True, output_format="PNG")
 
+st.write("Welcome to PetrofisicaHub! This page contains several equations to calculate porosity, permeability, water saturation and so on.")
+
 tabs_list = [
-    "Porosidade",
-    "Permeabilidade",
-    "Resistividade",
-    "Saturação de Água",
-    "Volume de Shale",
-    "Reservas",
+    "Porosity",
+    "Permeability",
+    "Resistivity",
+    "Water Saturation",
+    "Shale Volume",
+    "Reserves",
 ]
 
 tabs = st.tabs(tabs_list)
@@ -34,7 +36,7 @@ tabs = st.tabs(tabs_list)
 with tabs[0]:  # Porosidade
     render_porosity()
 
-with tabs[1]:  # Permeabilidade
+with tabs[1]:  # Permeability
     render_permeability()
 
 with tabs[2]:  # Resistividade

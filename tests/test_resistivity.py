@@ -23,7 +23,7 @@ def test_resistivity_apparent():
     tab.number_input["resist_phi"].set_value(0.25)
     tab.number_input["fator_tortuosidade_1"].set_value(1.0)
 
-    tab.button("Calcular", key=4).click()
+    tab.button("Calculate", key=4).click()
 
     assert tab.metric[0].label == "Resistividade Aparente da Água"
     assert tab.metric[0].value == "0.1250 ohm-m"

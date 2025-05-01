@@ -1,24 +1,23 @@
 import streamlit as st
 import numpy as np
-from sympy import symbols, sqrt, simplify
 
 
 def render_water_saturation():
-    st.subheader("Saturação de Água")
+    st.subheader("Water Saturation")
     st.write(
         """
         **Fluid saturation** is the ratio between the volume occupied by a fluid and the total pore volume of the rock:
 
         **Saturation = fluid volume / pore volume**
 
-        **Water saturation ($S_w$)** indicates how much of the porosity is filled with water. In irreductible water zones, $S_w$ can drop to around **15% in oil-wet rocks**, and remains **above 20% in water-wet rocks** — serving as a reference for validating calculations.
+        **Water saturation ($S_w$)** indicates how much of the porosity is filled with water. In irreducible water zones, $S_w$ can drop to around **15% in oil-wet rocks**, and remains **above 20% in water-wet rocks** — serving as a reference for validating calculations.
 
         Sedimentary rocks are typically **water-wet**, whereas **carbonates** often show **mixed or oil-wet wettability**.
 
         Obtaining a reliable $S_w$ value is essential for accurately **estimating hydrocarbon reserves**. It can be derived using **resistivity and spontaneous potential ($SP$) logs**.
         """
     )
-    with st.expander("Water Saturation ($S_w$) - Archie (1942)"):
+    with st.expander("Archie (1942)"):
         st.write(
             """
         Archie's equation is one of the most known ways to calculate water saturation. This author included in his equation different physical rock properties and measurements from different well logs like tortuosity, water and formation resistivities, saturation exponent, and porosity. The equation is the following:
@@ -88,7 +87,7 @@ def render_water_saturation():
             except Exception as e:
                 print("An error occurred: {e}")
 
-    with st.expander("Water Saturation ($S_w$) - Dewan (1983)"):
+    with st.expander("Dewan (1983)"):
         sw_dewan_opts = st.radio(
             label="There are two types:",
             options=["Compensated Water Saturation", "Dispersed Clay Model"],
@@ -240,7 +239,7 @@ def render_water_saturation():
                     except Exception as e:
                         st.error(f"An error occurred: {e}")
 
-    with st.expander("Water Saturation ($S_w$) - Simandoux, Ferlt, and Schlumberger"):
+    with st.expander("Simandoux, Ferlt, and Schlumberger"):
         author_radio = st.radio(
             "Select the author:",
             horizontal=True,
@@ -436,7 +435,7 @@ def render_water_saturation():
 
             if st.button("Calculate", key=key_ferlt + "6"):
                 try:
-                    root1 = (rw / rt)
+                    root1 = rw / rt
                     root2 = ((a * vsh) / 2) ** 2
                     term1 = np.sqrt(root1 + root2)
                     term2 = (a * vsh) / 2

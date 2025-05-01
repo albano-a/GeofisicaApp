@@ -1,6 +1,7 @@
 import streamlit as st
 import math
 
+
 def render_math():
     cols = st.columns(3)
 
@@ -13,7 +14,7 @@ def render_math():
             language="python",
             line_numbers=True,
         )
-        st.write("Calcular seno, cosseno, e tangente:")
+        st.write("Calculate seno, cosseno, e tangente:")
         st.code(
             f"""
             angle = 30
@@ -24,7 +25,7 @@ def render_math():
             language="python",
             line_numbers=True,
         )
-        st.write("Calcular arco seno, arco cosseno, e arco tangente:")
+        st.write("Calculate arco seno, arco cosseno, e arco tangente:")
         st.code(
             f"""
             angle = 30

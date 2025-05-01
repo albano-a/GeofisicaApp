@@ -28,7 +28,7 @@ def render_resistivity():
     with st.expander(r"Resistividade da Água $R_{w}$/$R_{wa}$ - Archie"):
         st.write(
             r"""
-        Uma das formas mais conhecidas de calcular a saturação de água é por meio da equação de Archie, que pode ser utilizada tanto para a resistividade quanto para a resistividade aparente. A diferença entre as duas equações é que na de resistividade se usa a resistividade da formação, e na de resistividade aparente se usa a resistividade verdadeira da formação, conseguido a partir de um perfil de resistividade profunda.
+        Uma das formas mais conhecidas de Calculate a saturação de água é por meio da equação de Archie, que pode ser utilizada tanto para a resistividade quanto para a resistividade aparente. A diferença entre as duas equações é que na de resistividade se usa a resistividade da formação, e na de resistividade aparente se usa a resistividade verdadeira da formação, conseguido a partir de um perfil de resistividade profunda.
         """
         )
         st.latex(
@@ -78,7 +78,7 @@ def render_resistivity():
                 help="Grau de desvio das trajetórias dos fluidos em relação ao caminho mais curto, devido à geometria dos poros.",
                 key="fator_tortuosidade_1",
             )
-        if st.button("Calcular", key=4):
+        if st.button("Calculate", key=4):
             try:
                 if a == 0:
                     st.warning("O fator de tortuosidade não pode ser zero.")
@@ -93,7 +93,7 @@ def render_resistivity():
                         value=f"{rw:.4f} ohm-m",
                     )
             except Exception as e:
-                st.warning(f"Ocorreu um erro: {e}")
+                st.warning(f"An error occurred: {e}")
 
     with st.expander("Resistividade da Água - Western Atlas (1985)"):
         st.write(
@@ -111,7 +111,7 @@ def render_resistivity():
         with cols[1]:
             bht = st.number_input(r"$\text{BHT}$ (ºF)", min_value=0.00)
 
-        if st.button("Calcular", key="western_atlas_1"):
+        if st.button("Calculate", key="western_atlas_1"):
             try:
                 if a == 0:
                     st.warning("O fator de tortuosidade não pode ser zero.")
@@ -127,7 +127,7 @@ def render_resistivity():
                             value=f"{rw:.4f} ohm-m",
                         )
             except Exception as e:
-                st.warning(f"Ocorreu um erro: {e}")
+                st.warning(f"An error occurred: {e}")
 
         list_western_atlas_tabs = [
             r"Res. Equivalente da Água ($R_{we}$)",
@@ -156,14 +156,14 @@ def render_resistivity():
             with cols[2]:
                 sp = st.number_input("$SP$ (mV)", min_value=0.00, key="sp_rwe")
 
-            if st.button("Calcular", key="western_atlas_2"):
+            if st.button("Calculate", key="western_atlas_2"):
                 try:
                     rwe = rmf * 10 ** (sp / (61 + 0.133 * bht))
                     st.metric(
                         "Resistividade Equivalente da Água", value=f"{rwe:.4f} ohm-m"
                     )
                 except Exception as e:
-                    st.warning(f"Ocorreu um erro: {e}")
+                    st.warning(f"An error occurred: {e}")
 
         with wes_at_tabs[1]:
             st.latex(r"R_{mf} = \frac{R_{mfsurf}(T_{surf}+6.77)}{T_{f} + 6.77}")
@@ -187,14 +187,14 @@ def render_resistivity():
             with cols[2]:
                 tf = st.number_input("$SP$ (mV)", min_value=0.00, key="tf_rmf")
 
-            if st.button("Calcular", key="wester_atlas_3"):
+            if st.button("Calculate", key="wester_atlas_3"):
                 try:
                     rmf = (rmfsurf * (tsurf + 6.77)) / (tf + 6.77)
                     st.metric(
                         "Resistividade Equivalente da Água", value=f"{rmf:.4f} ohm-m"
                     )
                 except Exception as e:
-                    st.warning(f"Ocorreu um erro: {e}")
+                    st.warning(f"An error occurred: {e}")
         with wes_at_tabs[2]:
             st.latex(r"T_{f} = \left(\frac{BHT - AMST}{TD} \cdot FD \right) + AMST")
             st.write(
@@ -215,7 +215,7 @@ def render_resistivity():
                 amst = st.number_input(r"$AMST$ (ºF)")
                 fd = st.number_input(r"$FD$ ft", min_value=0.00)
 
-            if st.button("Calcular", key="calculate_tf"):
+            if st.button("Calculate", key="calculate_tf"):
                 try:
                     tf = ((bht - amst) / td * fd) + amst
                     st.metric("Temperatura de Formação", value=f"{tf:.2f} ºF")
@@ -270,7 +270,7 @@ def render_resistivity():
             with cols[1]:
                 tf = st.number_input("$T_{f} (ºF)$", min_value=0.00)
 
-            if st.button("Calcular", key="sp-log-tf"):
+            if st.button("Calculate", key="sp-log-tf"):
                 try:
                     K = (0.133 * tf) + 60
                     st.metric("Constante K", value=f"{K}")
@@ -296,7 +296,7 @@ def render_resistivity():
             sw = st.number_input("$S_{w}$", min_value=0.00)
             n = st.number_input("$n$", min_value=0.00)
 
-        if st.button("Calcular", key="total_resistivity"):
+        if st.button("Calculate", key="total_resistivity"):
             try:
                 rt = (a * rw) / ((phi**m) * (sw**n))
                 st.metric("Resistividade Total", value=f"{rt:.4f}")
