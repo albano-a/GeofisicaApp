@@ -1,19 +1,20 @@
 import streamlit as st
 from components.header import render_header
 
+GEOFISICACODE = "pages/1_GeofisicaCode.py"
+GEOLOGIHUB = "pages/2_GeologiHub.py"
+MINERALHUB = "pages/3_MineralHub.py"
+PETROFISICAHUB = "pages/4_PetrofisicaHub.py"
+CALCHUB = "pages/5_CalcHub.py"
+FISICAHUB = "pages/6_FisicaHub.py"
+PAGE_LABEL = "Acessar aplicativo :material/arrow_right_alt:"
+
 render_header(
     page_title="GeofisicaApp",
     page_icon="assets/geofisicahub_favicons.svg",
     layout="centered",
-    menu_items={
-        "About": """
-        Esse aplicativo faz parte do ecossistema
-        do GeofisicaHub.
-        
-        #### Desenvolvido por André Albano
-        """
-    },
 )
+
 
 st.image("assets/GeofisicaApp_beta.png", use_container_width=True)
 st.info(
@@ -22,106 +23,67 @@ st.info(
 )
 st.write(
     """
-    Explore os conteúdos disponíveis abaixo:
+    Explore os aplicativos abaixo:
     """
 )
 
 
-columns = st.columns(3, gap="small", border=True)
-
-with columns[0]:
+with st.expander("GeofísicaCode", icon=":material/public:"):
     st.write(
         """
-        #### GeofísicaCode
-        """,
-        unsafe_allow_html=True,
+        Códigos para as principais bibliotecas do Python e da própria linguagem em si.
+        """
     )
-    st.link_button(
-        "Clique aqui",
-        url="GeofisicaCode",
-        type="primary",
-        icon=":material/public:",
-        use_container_width=True,
+    st.page_link(
+        page=GEOFISICACODE,
+        label=PAGE_LABEL,
     )
 
 
-with columns[1]:
+with st.expander("GeologiHub", icon=":material/layers:"):
     st.write(
         """
-        #### GeologiHub
-        """,
-        unsafe_allow_html=True,
+        Contém a tabela cronoestratigráfica e um conversor de 
+        """
     )
-    st.link_button(
-        "Clique aqui",
-        url="GeologiHub",
-        type="primary",
-        icon=":material/layers:",
-        use_container_width=True,
+    st.page_link(
+        page=GEOLOGIHUB,
+        label=PAGE_LABEL,
     )
 
-with columns[2]:
-    st.write(
-        """
-        #### MineralHub
-        """,
-        unsafe_allow_html=True,
-    )
-    st.link_button(
-        "Clique aqui",
-        url="MineralHub",
-        type="primary",
-        icon=":material/diamond:",
-        use_container_width=True,
+
+with st.expander("MineralHub", icon=":material/diamond:"):
+    st.page_link(
+        page=MINERALHUB,
+        label=PAGE_LABEL,
     )
     # ste.editor().Monaco()
 
-columns = st.columns(3, gap="small", border=True)
-
-with columns[0]:
-    st.write(
-        """
-        #### PetrofisicaHub
-        """,
-        unsafe_allow_html=True,
-    )
-    st.link_button(
-        "Clique aqui",
-        url="PetrofisicaHub",
-        type="primary",
-        icon=":material/stacked_line_chart:",
-        use_container_width=True,
+with st.expander("PetrofisicaHub", icon=":material/stacked_line_chart:"):
+    st.page_link(
+        page=PETROFISICAHUB,
+        label=PAGE_LABEL,
     )
     # ste.editor().Monaco()
 
-with columns[1]:
+with st.expander("CalcHub", icon=":material/functions:"):
     st.write(
         """
         <h4 style="color:#6a6c70">CalcHub</h4>
         """,
         unsafe_allow_html=True,
     )
-    st.link_button(
-        "Clique aqui",
-        url="CalcHub",
-        type="primary",
+    st.page_link(
+        page=CALCHUB,
+        label=PAGE_LABEL,
         icon=":material/functions:",
-        use_container_width=True,
         disabled=True,
     )
 
-with columns[2]:
-    st.write(
-        """
-        <h4 style="color:#6a6c70">FisicaHub</h4>
-        """,
-        unsafe_allow_html=True,
-    )
-    st.link_button(
-        "Clique aqui",
-        url="FisicaHub",
-        type="primary",
+with st.expander("FisicaHub", icon=":material/orbit:"):
+    st.page_link(
+        page=FISICAHUB,
+        label=PAGE_LABEL,
         icon=":material/orbit:",
-        use_container_width=True,
         disabled=True,
     )
