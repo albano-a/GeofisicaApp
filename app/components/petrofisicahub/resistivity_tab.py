@@ -71,7 +71,7 @@ def render_resistivity():
                 key="expoente_cimentacao_1",
             )
         with cols[1]:
-            phi = st.number_input("$\phi$ (decimal)", min_value=0.01, max_value=1.00)
+            phi = st.number_input(r"$\phi$ (decimal)", min_value=0.01, max_value=1.00)
             a = st.number_input(
                 "$a$",
                 min_value=0.01,

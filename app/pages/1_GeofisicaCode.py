@@ -25,6 +25,10 @@ render_header(
 )
 
 st.image("assets/GeofisicaCode.svg", width=600, output_format="PNG")
+st.info(
+    "Estamos trabalhando para completar esta página com mais códigos.",
+    icon=":material/construction:",
+)
 
 list_of_tabs_geofisicacode = [
     "Base",

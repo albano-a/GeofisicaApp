@@ -327,7 +327,7 @@ def render_water_saturation():
                 """
             )
             st.write(
-                """
+                r"""
                 Where:  
                 $S_w$ - water saturation of the uninvaded zone  
                 $R_t$ - true formation resistivity (i.e., deep induction or deep laterolog corrected for invasion)  
