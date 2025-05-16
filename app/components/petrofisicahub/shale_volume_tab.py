@@ -3,7 +3,6 @@ import scripts.petrophysics.shale_volume as sv
 
 
 def render_shale_volume():
-    st.subheader("Shale Volume")
 
     st.write(
         """

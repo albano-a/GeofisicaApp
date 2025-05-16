@@ -2,7 +2,6 @@ import streamlit as st
 
 
 def render_oil_reserves():
-    st.subheader("Reservas")
     st.write(
         """
     The calculation of porosity and water saturation plays a crucial role when estimating

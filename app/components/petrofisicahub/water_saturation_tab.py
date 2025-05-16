@@ -3,7 +3,6 @@ import numpy as np
 
 
 def render_water_saturation():
-    st.subheader("Water Saturation")
     st.write(
         """
         **Fluid saturation** is the ratio between the volume occupied by a fluid and the total pore volume of the rock:

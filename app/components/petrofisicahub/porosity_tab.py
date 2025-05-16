@@ -6,13 +6,11 @@ import scripts.petrophysics.shale_volume as sv
 
 
 def render_porosity():
-    st.subheader("Porosity")
-
     st.write(
         r"""
         Porosity is an important petrophysical parameter of the rock, defined as the ratio between the pore volume of the rock and the total volume of the rock."""
     )
-    st.latex(r"\text{Porosity} = \frac{\text{Volume dos Poros}}{\text{Volume Total}}")
+    st.latex(r"\text{Porosity} = \frac{\text{Pore Volume}}{\text{Total Volume}}")
     st.write(
         """
         This physical property limits the rock's ability to accumulate hydrocarbons (oil, condensates, or gas). However, porosity must be interconnected to add commercial value to a reservoir. There are total porosity and effective porosity, where the former relates to all the pores in a rock, and the latter only to the interconnected pores, which are more important during hydrocarbon production.
@@ -118,13 +116,13 @@ def render_porosity():
         sonic_porosity_eqs = [
             "Wyllie *et al.*, 1958",
             "Raymer *et al.*, 1980",
-            "Formações Não-Consolidadas",
+            "Non-Consolidated Formations",
         ]
         sonic_tabs = st.tabs(sonic_porosity_eqs)
         with sonic_tabs[0]:
             st.write(
                 """
-            O cálculo da porosity derivada do perfil sônico pode ser feito utilizando a equação da média de tempos de Wyllie (Wyllie *et al.*, 1958), expressa da seguinte forma:
+            The calculation of porosity derived from the sonic log can be performed using the time-average equation by Wyllie (Wyllie *et al.*, 1958), expressed as follows:
             """
             )
             st.latex(
@@ -132,11 +130,11 @@ def render_porosity():
             )
             st.write(
                 r"""
-                Onde:  
-                $\phi_{S}$ - Porosity sônica  
-                $\Delta t_{ma}$ - Tempo de trânsito da matriz  
-                $\Delta t_{log}$ - Tempo de trânsito da formação (obtido do perfil sônico)  
-                $\Delta t_{fl}$ - Tempo de trânsito do fluido de perfuração
+                Where:  
+                $\phi_{S}$ - Sonic porosity  
+                $\Delta t_{ma}$ - Transit time of the matrix interval  
+                $\Delta t_{log}$ - Transit time of the formation interval (obtained from the sonic log)  
+                $\Delta t_{fl}$ - Transit time of the fluid interval
                 """
             )
             cols = st.columns(3)
@@ -151,9 +149,9 @@ def render_porosity():
                     min_value=0.0,
                     value=55.5,
                     help="""
-                    Arenito: 55.5 us/ft\n\n
-                    Carbonato: 47.6 us/ft\n\n
-                    Dolomita: 43.5 us/ft
+                    Sandstone: 55.5 us/ft\n\n
+                    Limestone: 47.6 us/ft\n\n
+                    Dolomite: 43.5 us/ft
                     """,
                 )
             with cols[2]:
@@ -162,8 +160,8 @@ def render_porosity():
                     min_value=0.0,
                     value=189.0,
                     help="""
-                    Água (SWBM): 189 us/ft\n\n
-                    Óleo (OBM): 205 us/ft
+                    Water (SWBM): 189 us/ft\n\n
+                    Oil (OBM): 205 us/ft
                     """,
                 )
             if st.button("Calculate", key="sonic_porosity"):
@@ -181,7 +179,7 @@ def render_porosity():
         with sonic_tabs[1]:
             st.write(
                 """
-                Outra forma de Calculate a porosity derivada do sônico é através da equação de Raymer-Hunt-Gardner (RHG) (Raymer et al., 1980), que a calcula utilizando os valores de matriz e de sônico, e é expressa da seguinte forma:
+                Another way to calculate porosity derived from the sonic log is through the Raymer-Hunt-Gardner (RHG) equation (Raymer et al., 1980), which uses the matrix and sonic values, and is expressed as follows:
                 """
             )
             st.latex(
@@ -189,10 +187,10 @@ def render_porosity():
             )
             st.write(
                 r"""
-                Onde:  
-                $\phi_{S}$ - porosity derivada do sônico  
-                $\Delta t_{ma}$ - tempo de trânsito do intervalo na matriz  
-                $\Delta t_{log}$ - tempo de trânsito do intervalo na formação  
+                Where:  
+                $\phi_{S}$ - sonic-derived porosity  
+                $\Delta t_{ma}$ - transit time of the matrix interval  
+                $\Delta t_{log}$ - transit time of the formation interval  
                 """
             )
             cols = st.columns(2)
@@ -240,7 +238,7 @@ def render_porosity():
             with unc_form_tabs[0]:
                 st.write(
                     """
-                    Para Calculate a porosity sônica em formações inconsolidadas, podemos começar multiplicando a equação de porosity sônica de Wyllie et al. (1958) pela expressão inversa de um fator de compactação. A equação é a seguinte:
+                    To calculate sonic porosity in unconsolidated formations, we can start by multiplying the sonic porosity equation of Wyllie et al. (1958) by the inverse of a compaction factor. The equation is as follows:
                     """
                 )
                 st.latex(
@@ -248,12 +246,12 @@ def render_porosity():
                 )
                 st.write(
                     r"""
-                    Onde:  
-                    $\phi_{S}$ - Porosity sônica  
-                    $C_{p}$ - Fator de compactação  
-                    $\Delta t_{ma}$ - Tempo de trânsito do intervalo na matriz  
-                    $\Delta t_{log}$ - Tempo de trânsito do intervalo na formação (obtido do perfil sônico)  
-                    $\Delta t_{fl}$ - Tempo de trânsito do intervalo no fluido 
+                    Where:  
+                    $\phi_{S}$ - Sonic porosity  
+                    $C_{p}$ - Compaction factor  
+                    $\Delta t_{ma}$ - Transit time of the matrix interval  
+                    $\Delta t_{log}$ - Transit time of the formation interval (obtained from the sonic log)  
+                    $\Delta t_{fl}$ - Transit time of the fluid interval 
                     """
                 )
                 cols = st.columns(2)
@@ -268,8 +266,8 @@ def render_porosity():
                         min_value=0.0,
                         value=189.0,
                         help="""
-                        Água (SWBM): 189 us/ft\n\n
-                        Óleo (OBM): 205 us/ft
+                        Water (SWBM): 189 us/ft\n\n
+                        Oil (OBM): 205 us/ft
                         """,
                         key="unconsolidated_formation_fl",
                     )
@@ -285,9 +283,9 @@ def render_porosity():
                         min_value=0.0,
                         value=55.5,
                         help="""
-                        Arenito: 55.5 us/ft\n\n
-                        Carbonato: 47.6 us/ft\n\n
-                        Dolomita: 43.5 us/ft
+                        Sandstone: 55.5 us/ft\n\n
+                        Limestone: 47.6 us/ft\n\n
+                        Dolomite: 43.5 us/ft
                         """,
                         key="unconsolidated_formation_ma",
                     )
@@ -304,15 +302,15 @@ def render_porosity():
             with unc_form_tabs[1]:
                 st.write(
                     """
-                    O fator de compactação é calculado pela seguinte equação, que leva em consideração a porosity sônica de uma argila adjacente à formação de interesse:
+                    The compaction factor is calculated using the following equation, which takes into account the sonic porosity of a shale adjacent to the formation of interest:
                     """
                 )
                 st.latex(r"d = \frac{\Delta t_{sh} \cdot C}{100}")
                 st.write(
                     r"""
-                    Onde:  
-                    $\Delta t_{sh}$ - Tempo de trânsito do intervalo em uma argila adjacente à formação de interesse  
-                    $C$ - Constante, normalmente igual a 1,0 (Hilchie, 1978)  
+                    Where:  
+                    $\Delta t_{sh}$ - Transit time interval in a shale adjacent to the formation of interest  
+                    $C$ - Constant, usually equal to 1.0 (Hilchie, 1978)  
                     """
                 )
                 cols = st.columns(2)
@@ -332,7 +330,7 @@ def render_porosity():
     with st.expander("Resistivity Log"):
         list_of_resistivity_tabs = [
             "Porosity",
-            "Porosity de Zona Invadida",
+            "Flushed Zone Porosity",
         ]
 
         resistivity_tabs = st.tabs(list_of_resistivity_tabs)
@@ -340,10 +338,10 @@ def render_porosity():
         with resistivity_tabs[0]:
             st.write(
                 """
-                Partindo da conhecida Equação de Archie, mais famosa pelos cálculos de resistividade da água, 
-                ela também é utilizada para a determinação da porosity a partir da resistividade. 
-                Esta equação envolve os valores do fator de tortuosidade, resistividades da formação e da 
-                água, saturação de água, e os expoentes de saturação e de cimentação, sendo expressa da seguinte forma:
+                Starting from the well-known Archie Equation, most famous for water resistivity calculations, 
+                it is also used for determining porosity from resistivity. 
+                This equation involves the values of the tortuosity factor, formation and water resistivities, 
+                water saturation, and the cementation and saturation exponents, and is expressed as follows:
                 """
             )
             st.latex(
@@ -351,14 +349,14 @@ def render_porosity():
             )
             st.write(
                 r"""
-                Onde:
+                Where:
                 $\phi$ - Porosity  
-                $S_{w}$ - saturação de água da zona não invadida  
-                $R_{w}$ - Resistividade da água da formação na temperatura de formação  
-                $R_{t}$ - Resistividade verdadeira da formação (por exemplo, leitura profunda da indução ou laterolog profunda corrigida para invasão)  
-                $a$ - Fator de tortuosidade  
-                $m$ - Expoente de cimentação  
-                $n$ - Expoente de saturação  
+                $S_{w}$ - Water saturation in the uninvaded zone  
+                $R_{w}$ - Formation water resistivity at formation temperature  
+                $R_{t}$ - True formation resistivity (e.g., deep induction reading or deep laterolog corrected for invasion)  
+                $a$ - Tortuosity factor  
+                $m$ - Cementation exponent  
+                $n$ - Saturation exponent  
                 """
             )
             # first col - a, rt, n
@@ -407,21 +405,21 @@ def render_porosity():
                     ) ** (1 / cement_exp)
                     if 0 < phi < 1:
                         st.metric(
-                            "Porosity pela Resistividade",
+                            "Resistivity Porosity",
                             value=f"{phi:.4g} | {phi*100:.2f}%",
                         )
                     else:
-                        st.error("O valor de porosity deve ser entre 0 e 1")
+                        st.error("The value must be between 0 and 1")
                 except Exception as e:
-                    st.error(f"Um erro ocorreu: {e}")
+                    st.error(f"An error occurred: {e}")
 
         with resistivity_tabs[1]:
             st.write(
                 """
-                Para o cálculo da porosity derivada da resistividade na zona invadida, 
-                existem casos em que é necessário aplicar uma correção para hidrocarbonetos residuais. 
-                Nessa situação, é preciso conhecer a saturação de água da zona não invadida e o valor 
-                do expoente de saturação. A expressão é resumida da seguinte forma:
+                For the calculation of porosity derived from resistivity in the flushed zone,
+                there are cases where it is necessary to apply a correction for residual hydrocarbons.
+                In this situation, it is necessary to know the water saturation of the uninvaded zone and the value
+                of the saturation exponent. The expression is summarized as follows:
                 """
             )
             st.latex(
@@ -429,15 +427,15 @@ def render_porosity():
             )
             st.write(
                 r"""
-                Onde:  
+                Where:  
                 $\phi$ - Porosity  
-                $a$ - Fator de tortuosidade  
-                $S_w$ - Saturação de água da zona não invadida  
-                $m$ - Expoente de cimentação  
-                $n$ - Expoente de saturação  
-                $R_{mf}$ - Resistividade do filtrado de lama na temperatura de formação  
-                $R_{xo}$ - Resistividade rasa obtida com ferramentas de leitura muito superficial, como o laterolog-8,   
-                o perfil microesfericamente focado ou o microlaterolog  
+                $a$ - Tortuosity factor  
+                $S_w$ - Water saturation of the uninvaded zone  
+                $m$ - Cementation exponent  
+                $n$ - Saturation exponent  
+                $R_{mf}$ - Mud filtrate resistivity at formation temperature  
+                $R_{xo}$ - Shallow resistivity obtained with very shallow reading tools, such as laterolog-8,   
+                micro-spherically focused log, or microlaterolog  
                 """
             )
             cols = st.columns(2)
@@ -455,7 +453,7 @@ def render_porosity():
                 sat_exp = st.number_input(
                     r"$n$",
                     min_value=0.0,
-                    help="Expoente de Saturação",
+                    help="Saturation Exponent",
                     key="sat_exp_archie_2",
                 )
             with cols[1]:
@@ -466,13 +464,13 @@ def render_porosity():
                 tort_factor = st.number_input(
                     r"$a$",
                     min_value=0.00,
-                    help="Fator de Tortuosidade",
+                    help="Tortuosity Factor",
                     key="tort_factor_archie_2",
                 )
                 cement_exp = st.number_input(
                     r"$m$",
                     min_value=0.0,
-                    help="Expoente de Cimentação",
+                    help="Cementation Exponent",
                     key="cement_exp_2",
                 )
 
@@ -484,13 +482,13 @@ def render_porosity():
                     ) ** (1 / cement_exp)
                     if 0 < phi < 1:
                         st.metric(
-                            "Porosity pela Resistividade - Zona Invadida",
+                            "Resistivity Porosity - Flushed Zone",
                             value=f"{phi:.4g} | {phi*100:.2f}%",
                         )
                     else:
-                        st.error("O valor de porosity deve ser entre 0 e 1")
+                        st.error("The value must be between 0 and 1")
                 except Exception as e:
-                    st.error(f"Um erro ocorreu: {e}")
+                    st.error(f"An error occurred: {e}")
 
     with st.expander("Shale Correction"):
         # Abas: Dewan (densidade, sonico neutrao), Schlumberger (densidade, neutrao)
@@ -501,25 +499,22 @@ def render_porosity():
         with shale_correction_tabs[0]:
             st.write(
                 """
-                Dewan (1983) propôs uma série de correções para valores de porosity derivados de logs de densidade, 
-                sônico e de nêutrons, levando em consideração o Shale Volume e a porosity correspondente de uma 
-                argila adjacente à profundidade de interesse. Para cada tipo de log, Dewan forneceu uma equação específica
-                para corrigir a porosity, considerando a influência do Shale Volume e o valor da porosity na argila próxima.
+                Dewan (1983) proposed a series of corrections for porosity values derived from density, sonic, and neutron logs, taking into account the Shale Volume and the corresponding porosity of a shale adjacent to the depth of interest. For each type of log, Dewan provided a specific equation to correct the porosity, considering the influence of Shale Volume and the porosity value in the nearby shale.
                 """
             )
             st.latex(r"\phi_{cor} = \phi - V_{shale} \cdot \phi_{shale}")
             st.write(
                 r"""
-                Onde:
-                $\phi_{cor}$ - Porosity pelo perfil de Densidade, Sônico ou Neutrão - corrigido para shale.
-                $\phi$ - Porosity pelo perfil de Densidade, Sônico ou Neutrão
-                $\phi_{shale}$ - Porosity pelos perfis em um shale próximo
+                Where:
+                $\phi_{cor}$ - Porosity from Density, Sonic, or Neutron log - corrected for shale.
+                $\phi$ - Porosity from Density, Sonic, or Neutron log
+                $\phi_{shale}$ - Porosity from logs in a nearby shale
                 $V_{shale}$ - Shale Volume 
                 """
             )
             log_opts = st.radio(
-                "Selecione o perfil:",
-                options=["Densidade", "Sônico", "Neutrão"],
+                "Select the log:",
+                options=["Density", "Sonic", "Neutron"],
                 horizontal=True,
             )
             cols = st.columns(3)
@@ -538,31 +533,28 @@ def render_porosity():
             if st.button("Calculate", key="dewan"):
                 try:
                     phi_cor = phi - vshale * phi_shale
-                    if log_opts == "Densidade":
+                    if log_opts == "Density":
                         st.metric(
-                            "Porosity pela Densidade corrigida para Shale",
+                            "Density log porosity corrected for Shale",
                             value=f"{phi_cor:.4g} | {phi_cor*100:.2f}%",
                         )
-                    elif log_opts == "Sônico":
+                    elif log_opts == "Sonic":
                         st.metric(
-                            "Porosity pelo Sônico corrigida para Shale",
+                            "Sonic log porosity corrected for Shale",
                             value=f"{phi_cor:.4g} | {phi_cor*100:.2f}%",
                         )
-                    elif log_opts == "Neutrão":
+                    elif log_opts == "Neutron":
                         st.metric(
-                            "Porosity pelo Neutrão corrigida para Shale",
+                            "Neutron log porosity corrected for Shale",
                             value=f"{phi_cor:.4g} | {phi_cor*100:.2f}%",
                         )
                 except Exception as e:
-                    st.warning(f"Um erro ocorreu: {e}")
+                    st.warning(f"An error occurred: {e}")
 
         with shale_correction_tabs[1]:
             st.write(
                 """
-                Schlumberger (1975) propôs correções para os valores de porosity 
-                derivados de logs de densidade e de neutrão. Em ambos os casos, as 
-                equações incluem o Shale Volume e o valor de porosity de uma 
-                argila próxima à profundidade de interesse. As expressões são as seguintes:
+                Schlumberger (1975) proposed corrections for porosity values derived from density and neutron logs. In both cases, the equations include the Shale Volume and the porosity value of a shale adjacent to the depth of interest. The expressions are as follows:
                 """
             )
             cols = st.columns(2)
@@ -572,10 +564,10 @@ def render_porosity():
                 )
                 st.write(
                     r"""
-                    Onde:  
-                    $\phi_{De}$ - porosity do log de densidade corrigida para shale  
-                    $\phi_{D}$ - porosity do log de densidade  
-                    $\phi_{DShale}$ - porosity do log de densidade em um shale adjacente  
+                    Where:  
+                    $\phi_{De}$ - Density log porosity corrected for shale  
+                    $\phi_{D}$ - Density log porosity  
+                    $\phi_{DShale}$ - Density log porosity in an adjacent shale  
                     $V_{shale}$- Shale Volume  
                     """
                 )
@@ -585,15 +577,15 @@ def render_porosity():
                 )
                 st.write(
                     r"""
-                    Onde:  
-                    $\phi_{Ne}$ - porosity do log de neutrão corrigida para shale  
-                    $\phi_{N}$ - porosity do log de neutrão  
-                    $\phi_{NShale}$ - porosity do log de neutrão em um shale adjacente  
+                    Where:  
+                    $\phi_{Ne}$ - Neutron log porosity corrected for shale  
+                    $\phi_{N}$ - Neutron log porosity  
+                    $\phi_{NShale}$ - Neutron log porosity in an adjacent shale  
                     $V_{shale}$- Shale Volume  
                     """
                 )
             opts_schlumberger = st.radio(
-                "Escolha um perfil:", options=["Densidade", "Neutrão"], horizontal=True
+                "Choose a log:", options=["Density", "Neutron"], horizontal=True
             )
             cols = st.columns(3)
             with cols[0]:
@@ -619,23 +611,20 @@ def render_porosity():
                 )
 
             if st.button(
-                "Calculate (Densidade)"
-                if opts_schlumberger == "Densidade"
-                else "Calculate (Neutrão)"
+                "Calculate (Density)"
+                if opts_schlumberger == "Density"
+                else "Calculate (Neutron)"
             ):
                 try:
-                    phi_result = phi_dn - (
-                        (phi_dnshale / 0.45) * 0.03
-                        if opts_schlumberger == "Neutrão"
-                        else 0.13 * vshale
-                    )
+                    if opts_schlumberger == "Density":
+                        phi_result = phi_dn - ((phi_dnshale / 0.45) * 0.13 * vshale)
+                        label = "Corrected Porosity (Density)"
+                    else:
+                        phi_result = phi_dn - ((phi_dnshale / 0.45) * 0.03 * vshale)
+                        label = "Corrected Porosity (Neutron)"
                     st.metric(
-                        (
-                            "Porosity corrigida (Densidade)"
-                            if opts_schlumberger == "Densidade"
-                            else "Porosity corrigida (Neutrão)"
-                        ),
+                        label,
                         f"{phi_result:.4g} | {phi_result*100:.2f}%",
                     )
                 except Exception as e:
-                    st.warning(f"Um erro ocorreu: {e}")
+                    st.warning(f"An error occurred: {e}")

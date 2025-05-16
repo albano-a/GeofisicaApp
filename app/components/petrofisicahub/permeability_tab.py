@@ -5,7 +5,6 @@ import numpy as np
 
 
 def render_permeability():
-    st.subheader("Permeability")
 
     st.write(
         """

@@ -3,59 +3,57 @@ import numpy as np
 
 
 def render_resistivity():
-    st.subheader("Resistividade")
-
     st.write(
         """
-        Resistividade é definida como a oposição ou resistência que um material tem para interferir no 
-        fluxo de uma corrente elétrica. No caso das rochas sedimentares, estas contêm fluidos em seus 
-        poros que têm diferentes tipos de resistividades.
+        Resistivity is defined as the opposition or resistance that a material has to interfere with 
+        the flow of an electric current. In the case of sedimentary rocks, these contain fluids in their 
+        pores that have different types of resistivities.
 
-        Um volume de poros da rocha pode conter igualmente óleo, gás ou água. Óleo e gás têm um valor 
-        de resistividade mais alto do que a água, o que permite detectar a presença de hidrocarbonetos 
-        em um poço usando ferramentas de registro de resistividade, por exemplo.
+        A rock pore volume may equally contain oil, gas, or water. Oil and gas have a higher resistivity 
+        value than water, which allows the detection of hydrocarbons in a well using resistivity logging 
+        tools, for example.
 
-        No entanto, a salinidade da água também afeta a resistividade da água, e ela pode ter uma ampla 
-        gama de valores. A água salgada tem uma resistividade menor do que a água doce, portanto, tem um 
-        valor de resistividade mais baixo.
+        However, the salinity of the water also affects its resistivity, and it can have a wide 
+        range of values. Saltwater has a lower resistivity than freshwater, therefore, it has a 
+        lower resistivity value.
 
-        Além de ajudar a detectar a presença de hidrocarbonetos, a resistividade da água é amplamente 
-        utilizada para o cálculo da saturação de água, que é um valor muito importante na 
-        estimativa de reservas de hidrocarbonetos. 
+        In addition to helping detect the presence of hydrocarbons, water resistivity is widely 
+        used for the calculation of water saturation, which is a very important value in 
+        hydrocarbon reserve estimation.
         """
     )
 
-    with st.expander(r"Resistividade da Água $R_{w}$/$R_{wa}$ - Archie"):
+    with st.expander(r"Water Resistivity $R_{w}$/$R_{wa}$ - Archie"):
         st.write(
             r"""
-        Uma das formas mais conhecidas de Calculate a saturação de água é por meio da equação de Archie, que pode ser utilizada tanto para a resistividade quanto para a resistividade aparente. A diferença entre as duas equações é que na de resistividade se usa a resistividade da formação, e na de resistividade aparente se usa a resistividade verdadeira da formação, conseguido a partir de um perfil de resistividade profunda.
+        One of the best-known ways to calculate water saturation is through the Archie equation, which can be used for both resistivity and apparent resistivity. The difference between the two equations is that for resistivity, the formation resistivity is used, and for apparent resistivity, the true formation resistivity is used, obtained from a deep resistivity log.
         """
         )
         st.latex(
             r"""
-            R_{w} = \frac{R_{o} \cdot \phi^{m}}{a}\space\text{ou}\space R_{wa} = \frac{R_{t} \cdot \phi^{m}}{a}
+            R_{w} = \frac{R_{o} \cdot \phi^{m}}{a}\space\text{or}\space R_{wa} = \frac{R_{t} \cdot \phi^{m}}{a}
                  """
         )
         st.write(
             r"""
-         Onde:
-            - $R_w/R_{wa}$ - Resistividade da Água/Resistividade Aparente da Água
+         Where:
+            - $R_w/R_{wa}$ - Water Resistivity/Apparent Water Resistivity
                         
-            - $R_{o}$ - Resistividade da formação saturada com água
+            - $R_{o}$ - Formation resistivity saturated with water
             
-            - $R_{t}$ - Resistividade verdadeira da formação obtida a partir de um perfil de resistividade profunda
+            - $R_{t}$ - True formation resistivity obtained from a deep resistivity log
 
-            - $\phi$ - Porosidade / $m$ - Expoente de cimentação / $a$ - Fator de tortuosidade
+            - $\phi$ - Porosity / $m$ - Cementation exponent / $a$ - Tortuosity factor
 
         """
         )
         list_rest_opts = [
-            r"Resistividade - $R_w$",
-            r"Resistividade Aparente - $R_{wa}$",
+            r"Resistivity - $R_w$",
+            r"Apparent Resistivity - $R_{wa}$",
         ]
         res_opts = st.radio(
-            "Tipo",
-            [r"Resistividade - $R_w$", r"Resistividade Aparente - $R_{wa}$"],
+            "Type",
+            [r"Resistivity - $R_w$", r"Apparent Resistivity - $R_{wa}$"],
             horizontal=True,
         )
         cols = st.columns(2)
@@ -67,7 +65,7 @@ def render_resistivity():
             m = st.number_input(
                 "$m$",
                 min_value=0.0,
-                help="Reflete a compactação e a permeabilidade da rocha.",
+                help="Reflects the compaction and permeability of the rock.",
                 key="expoente_cimentacao_1",
             )
         with cols[1]:
@@ -75,30 +73,30 @@ def render_resistivity():
             a = st.number_input(
                 "$a$",
                 min_value=0.01,
-                help="Grau de desvio das trajetórias dos fluidos em relação ao caminho mais curto, devido à geometria dos poros.",
+                help="Degree of deviation of fluid paths from the shortest path, due to pore geometry.",
                 key="fator_tortuosidade_1",
             )
         if st.button("Calculate", key=4):
             try:
                 if a == 0:
-                    st.warning("O fator de tortuosidade não pode ser zero.")
+                    st.warning("The tortuosity factor cannot be zero.")
                 else:
                     rw = (ro * phi**m) / a
                     st.metric(
                         (
-                            "Resistividade da Água"
+                            "Water Resistivity"
                             if res_opts == list_rest_opts[0]
-                            else "Resistividade Aparente da Água"
+                            else "Apparent Water Resistivity"
                         ),
                         value=f"{rw:.4f} ohm-m",
                     )
             except Exception as e:
                 st.warning(f"An error occurred: {e}")
 
-    with st.expander("Resistividade da Água - Western Atlas (1985)"):
+    with st.expander("Water Resistivity - Western Atlas (1985)"):
         st.write(
             r"""
-            A Western Atlas (1985) propôs uma equação para o cálculo da resistividade da água ($R_w$), composta por expressões matemáticas e valores como a resistividade equivalente da água ($R_{we}$) e a temperatura no fundo do poço ($\text{BHT}$). A equação é a seguinte:
+            Western Atlas (1985) proposed an equation for calculating water resistivity ($R_w$), composed of mathematical expressions and values such as the equivalent water resistivity ($R_{we}$) and the bottom hole temperature ($\text{BHT}$). The equation is as follows:
             """
         )
         st.latex(
@@ -114,25 +112,25 @@ def render_resistivity():
         if st.button("Calculate", key="western_atlas_1"):
             try:
                 if a == 0:
-                    st.warning("O fator de tortuosidade não pode ser zero.")
+                    st.warning("The tortuosity factor cannot be zero.")
                 else:
                     rw = (rwe + 0.131 * 10 ** ((1 / (np.log10(bht / 19.9))) - 2)) / (
                         -0.5 * rwe + 10 ** (0.0426 / np.log10(bht / 50.8))
                     )
                     if rw < 0:
-                        st.error("Algo está errado, o resultado não pode ser negativo.")
+                        st.error("Something is wrong, the result cannot be negative.")
                     else:
                         st.metric(
-                            "Resistividade da Água",
+                            "Water Resistivity",
                             value=f"{rw:.4f} ohm-m",
                         )
             except Exception as e:
                 st.warning(f"An error occurred: {e}")
 
         list_western_atlas_tabs = [
-            r"Res. Equivalente da Água ($R_{we}$)",
-            r"Res. do Filtrado de Lama ($R_{mf}$)",
-            r"Temperatura da Formação ($T_{f}$)",
+            r"Equivalent Water Resistivity ($R_{we}$)",
+            r"Filtrate Resistivity ($R_{mf}$)",
+            r"Formation Temperature ($T_{f}$)",
         ]
 
         wes_at_tabs = st.tabs(list_western_atlas_tabs)
@@ -141,9 +139,9 @@ def render_resistivity():
             st.latex(r"R_{we} = R_{mf} \cdot 10^{ {SP}/{61 + 0.133\text{BHT}}}")
             st.write(
                 r"""
-                $R_{mf}$ - Resistividade do Filtrado de Lama na Temperatura da Formação  
-                $\text{BHT}$ - Temperatura no Fundo do Poço (Bottom Hole Temperature)  
-                $SP$ - Medida do Potencial Espontâneo
+                $R_{mf}$ - Mud Filtrate Resistivity at Formation Temperature  
+                $\text{BHT}$ - Bottom Hole Temperature  
+                $SP$ - Spontaneous Potential Measurement
                 """
             )
             cols = st.columns(3)
@@ -160,7 +158,7 @@ def render_resistivity():
                 try:
                     rwe = rmf * 10 ** (sp / (61 + 0.133 * bht))
                     st.metric(
-                        "Resistividade Equivalente da Água", value=f"{rwe:.4f} ohm-m"
+                        "Equivalent Water Resistivity", value=f"{rwe:.4f} ohm-m"
                     )
                 except Exception as e:
                     st.warning(f"An error occurred: {e}")
@@ -169,10 +167,10 @@ def render_resistivity():
             st.latex(r"R_{mf} = \frac{R_{mfsurf}(T_{surf}+6.77)}{T_{f} + 6.77}")
             st.write(
                 r"""
-                $R_{mf}$ - Resistividade do filtrado de lama na temperatura da formação
-                $R_{mfsurf}$ - Resistividade do filtrado de lama na temperatura medida
-                $T_{surf}$ - Temperatura na qual a R_{mf} foi medida (temperatura superficial)
-                $T_{f}$ - Temperatura da Formação
+                $R_{mf}$ - Mud filtrate resistivity at formation temperature
+                $R_{mfsurf}$ - Mud filtrate resistivity at measured temperature
+                $T_{surf}$ - Temperature at which $R_{mf}$ was measured (surface temperature)
+                $T_{f}$ - Formation Temperature
                 """
             )
             cols = st.columns(3)
@@ -191,7 +189,7 @@ def render_resistivity():
                 try:
                     rmf = (rmfsurf * (tsurf + 6.77)) / (tf + 6.77)
                     st.metric(
-                        "Resistividade Equivalente da Água", value=f"{rmf:.4f} ohm-m"
+                        "Equivalent Water Resistivity", value=f"{rmf:.4f} ohm-m"
                     )
                 except Exception as e:
                     st.warning(f"An error occurred: {e}")
@@ -199,11 +197,11 @@ def render_resistivity():
             st.latex(r"T_{f} = \left(\frac{BHT - AMST}{TD} \cdot FD \right) + AMST")
             st.write(
                 """
-                $AMST$ - Temperatura Superficial Anual Média  
-                $TD$ - Profundidade Total  
-                $BHT$ - Temperatura no Fundo do Poço  
-                $T_{f}$ - Temperatura da Formação  
-                $FD$ - Profundidade da Formação  
+                $AMST$ - Annual Mean Surface Temperature  
+                $TD$ - Total Depth  
+                $BHT$ - Bottom Hole Temperature  
+                $T_{f}$ - Formation Temperature  
+                $FD$ - Formation Depth  
                 """
             )
             cols = st.columns(2)
@@ -218,24 +216,24 @@ def render_resistivity():
             if st.button("Calculate", key="calculate_tf"):
                 try:
                     tf = ((bht - amst) / td * fd) + amst
-                    st.metric("Temperatura de Formação", value=f"{tf:.2f} ºF")
+                    st.metric("Formation Temperature", value=f"{tf:.2f} ºF")
                 except:
                     print("An exception occurred")
 
-    with st.expander("Resistividade da Água - Perfil SP"):
+    with st.expander("Water Resistivity - SP Log"):
         st.write(
             """
-            Resistividade da água (Rw) também pode ser calculada a partir do registro de potencial espontâneo (SP) do poço. Essa equação requer os valores da resistividade do filtrado de lama, uma medição de SP e uma constante K que depende da temperatura da formação. A equação é a seguinte:
+            Water resistivity (Rw) can also be calculated from the well's spontaneous potential (SP) log. This equation requires the values of mud filtrate resistivity, an SP measurement, and a constant K that depends on the formation temperature. The equation is as follows:
             """
         )
         st.latex(r"R_w = 10^{(K \cdot \log(R_{mf}) + SP) / K}")
         st.write(
             r"""
-            Onde:
-            $R_{w}$ - Resistividade da Água
-            $R_{mf}$ - Resistividade do Filtrado de Lama na Temperatura da Formação
-            $K$ - Constante
-            $SP$ - Potencial Espontâneo
+            Where:
+            $R_{w}$ - Water Resistivity
+            $R_{mf}$ - Mud Filtrate Resistivity at Formation Temperature
+            $K$ - Constant
+            $SP$ - Spontaneous Potential
             """
         )
         cols = st.columns(3)
@@ -252,19 +250,19 @@ def render_resistivity():
             sp = sp_input
             try:
                 rw_output = 10 ** ((k * np.log10(rmf) + sp) / k)
-                st.metric("Resistividade da Água", value=f"{rw_output:.4f} ohm-m")
+                st.metric("Water Resistivity", value=f"{rw_output:.4f} ohm-m")
             except Exception as e:
-                st.error(f"Um erro ocorreu: {e}")
+                st.error(f"An error occurred: {e}")
 
-        k_tab = st.tabs(["Constante $K$"])
+        k_tab = st.tabs(["Constant $K$"])
         with k_tab[0]:
             st.write(
                 """
-                Para o cálculo da constante K, é necessário conhecer a temperatura da formação, e a expressão é a seguinte:
+                To calculate the constant K, it is necessary to know the formation temperature, and the expression is as follows:
                 """
             )
             st.latex(r"K = (0.133 \cdot T_{f}) + 60")
-            st.write("$T_{f}$ - Temperatura da Formação")
+            st.write("$T_{f}$ - Formation Temperature")
 
             cols = st.columns(3)
             with cols[1]:
@@ -273,14 +271,14 @@ def render_resistivity():
             if st.button("Calculate", key="sp-log-tf"):
                 try:
                     K = (0.133 * tf) + 60
-                    st.metric("Constante K", value=f"{K}")
+                    st.metric("Constant K", value=f"{K}")
                 except:
                     print("An exception occurred")
 
-    with st.expander("Resistividade Total"):
+    with st.expander("Total Resistivity"):
         st.write(
             r"""
-            A resistividade total ($R_t$) pode ser calculada pela equação de Archie. Essa equação é composta pelos valores de resistividade da água ($R_w$), fator de tortuosidade ($a$), porosidade ($\phi$), e os expoentes de cementação ($m$) e saturação ($n$). A expressão é a seguinte:
+            The total resistivity ($R_t$) can be calculated using the Archie equation. This equation is composed of the values of water resistivity ($R_w$), tortuosity factor ($a$), porosity ($\phi$), and the cementation ($m$) and saturation ($n$) exponents. The expression is as follows:
             """
         )
         st.latex(r"R_{t} = \frac{ a \cdot R_{w} }{ \phi^{m} \cdot S_{w}^{n}}")
@@ -299,6 +297,6 @@ def render_resistivity():
         if st.button("Calculate", key="total_resistivity"):
             try:
                 rt = (a * rw) / ((phi**m) * (sw**n))
-                st.metric("Resistividade Total", value=f"{rt:.4f}")
+                st.metric("Total Resistivity", value=f"{rt:.4f}")
             except Exception as e:
-                st.error(f"Um erro ocorreu: {e}")
+                st.error(f"An error occurred: {e}")
