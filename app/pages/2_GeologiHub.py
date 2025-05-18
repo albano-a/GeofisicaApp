@@ -34,7 +34,6 @@ for row in ws.iter_rows(
         linha.append(cell)
     dados.append(linha)
 
-print(dados)
 
 colunas = ["Pre-eon", "Eon", "Era", "Period", "Epoch", "Age", "Start (Ma)", "End (Ma)"]
 dados = dados[1:]

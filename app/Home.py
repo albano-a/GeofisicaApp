@@ -3,10 +3,11 @@ from components.header import render_header
 
 GEOFISICACODE = "pages/1_GeofisicaCode.py"
 GEOLOGIHUB = "pages/2_GeologiHub.py"
-MINERALHUB = "pages/3_MineralHub.py"
-PETROFISICAHUB = "pages/4_PetrofisicaHub.py"
-CALCHUB = "pages/5_CalcHub.py"
-FISICAHUB = "pages/6_FisicaHub.py"
+SEISHUB = "pages/3_SeisHub.py"
+MINERALHUB = "pages/4_MineralHub.py"
+PETROFISICAHUB = "pages/5_PetrofisicaHub.py"
+CALCHUB = "pages/6_CalcHub.py"
+FISICAHUB = "pages/7_FisicaHub.py"
 PAGE_LABEL = "Acessar aplicativo :material/arrow_right_alt:"
 
 render_header(
@@ -43,12 +44,24 @@ with st.expander("GeofísicaCode", icon=":material/public:"):
 with st.expander("GeologiHub", icon=":material/layers:"):
     st.write(
         """
-        Contém a tabela cronoestratigráfica e um conversor de 
+        Contém a tabela cronoestratigráfica e um conversor de idades geológicas
         """
     )
     st.page_link(
         page=GEOLOGIHUB,
         label=PAGE_LABEL,
+    )
+
+with st.expander("SeisHub", icon=":material/waves:"):
+    st.write(
+        """
+        Em produção
+        """
+    )
+    st.page_link(
+        page=SEISHUB,
+        label=PAGE_LABEL,
+        disabled=True,
     )
 
 
@@ -76,7 +89,6 @@ with st.expander("CalcHub", icon=":material/functions:"):
     st.page_link(
         page=CALCHUB,
         label=PAGE_LABEL,
-        icon=":material/functions:",
         disabled=True,
     )
 
@@ -84,6 +96,5 @@ with st.expander("FisicaHub", icon=":material/orbit:"):
     st.page_link(
         page=FISICAHUB,
         label=PAGE_LABEL,
-        icon=":material/orbit:",
         disabled=True,
     )
