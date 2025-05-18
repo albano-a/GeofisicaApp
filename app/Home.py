@@ -3,11 +3,11 @@ from components.header import render_header
 
 GEOFISICACODE = "pages/1_GeofisicaCode.py"
 GEOLOGIHUB = "pages/2_GeologiHub.py"
-SEISHUB = "pages/SeisHub.py"
-MINERALHUB = "pages/4_MineralHub.py"
-PETROFISICAHUB = "pages/5_PetrofisicaHub.py"
-CALCHUB = "pages/6_CalcHub.py"
-FISICAHUB = "pages/7_FisicaHub.py"
+MINERALHUB = "pages/3_MineralHub.py"
+PETROFISICAHUB = "pages/4_PetrofisicaHub.py"
+CALCHUB = "pages/5_CalcHub.py"
+FISICAHUB = "pages/6_FisicaHub.py"
+SEISHUB = "pages/8_SeisHub.py"
 PAGE_LABEL = "Acessar aplicativo :material/arrow_right_alt:"
 
 render_header(
