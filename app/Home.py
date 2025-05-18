@@ -3,7 +3,7 @@ from components.header import render_header
 
 GEOFISICACODE = "pages/1_GeofisicaCode.py"
 GEOLOGIHUB = "pages/2_GeologiHub.py"
-SEISHUB = "pages/3_SeisHub.py"
+SEISHUB = "pages/SeisHub.py"
 MINERALHUB = "pages/4_MineralHub.py"
 PETROFISICAHUB = "pages/5_PetrofisicaHub.py"
 CALCHUB = "pages/6_CalcHub.py"
