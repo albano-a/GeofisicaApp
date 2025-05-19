@@ -41,7 +41,7 @@ def render_base():
             line_numbers=True,
         )
 
-        st.write("##### Loop for")
+        st.write("##### for")
         st.code(
             """
             for i in range(5):
@@ -57,7 +57,7 @@ def render_base():
             line_numbers=True,
         )
 
-        st.write("##### Loop while")
+        st.write("##### while")
         st.code(
             """
             n = 0
