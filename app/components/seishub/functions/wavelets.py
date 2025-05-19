@@ -4,7 +4,7 @@ from scipy import signal
 from scipy.signal import butter, filtfilt
 
 
-def ricker(peak_freq, samples, dt):
+def ricker(peak_freq, dt, samples):
     """
     retorna a wavelet de Ricker e sua FFT
     """

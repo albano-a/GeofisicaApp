@@ -44,11 +44,11 @@ def render_wavelet():
                 help="Normally, this value is either 2 or 4 ms",
             )
         with cols[2]:
-            samples = st.number_input("Samples", min_value=0, value=36)
+            samples_ricker = st.number_input("Samples", min_value=0, value=100)
 
         with st.expander("Calculate and Plot"):
             try:
-                t, rwv, freqs, fft = ricker(peak_freq, dt, samples)
+                t, rwv, freqs, fft = ricker(peak_freq, dt=dt, samples=samples_ricker)
 
                 csv = (
                     pd.DataFrame({"time": t, "amplitude": rwv})
@@ -147,7 +147,7 @@ def render_wavelet():
 
         with st.expander("Calculate and Plot"):
             try:
-                t, bwv, freqs, fft = butterworth(h_f, l_f, samples, dt)
+                t, bwv, freqs, fft = butterworth(h_f, l_f, samples=samples, dt=dt)
 
                 csv = (
                     pd.DataFrame({"time": t, "amplitude": bwv})
