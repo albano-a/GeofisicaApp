@@ -9,3 +9,4 @@ plotly
 pdf2image
 Pillow
 sympy
+scipy
