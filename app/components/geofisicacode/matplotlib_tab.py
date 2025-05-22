@@ -1,5 +1,6 @@
 import streamlit as st
 import matplotlib.pyplot as plt
+import numpy as np
 
 
 def render_matplotlib():
@@ -32,12 +33,12 @@ def render_matplotlib():
         st.pyplot(fig)
 
     with cols[1]:
-        st.write("##### Gráfico de barras")
+        st.write("##### Bar Plot")
         st.code(
             """
-            nomes = ["A", "B", "C"]
-            valores = [10, 20, 15]
-            plt.bar(nomes, valores)
+            names = ["A", "B", "C"]
+            values = [10, 20, 15]
+            plt.bar(names, values)
             plt.show()
             """,
             language="python",
@@ -47,6 +48,20 @@ def render_matplotlib():
         valores = [10, 20, 15]
         fig, ax = plt.subplots(1, 1)
         ax.bar(nomes, valores)
+        st.pyplot(fig)
+
+        st.write("##### Histograma")
+        st.code(
+            """
+            data = np.random.randn(1000)
+            plt.hist(data, bins=30)
+            plt.show()
+            """
+        )
+        bins = st.slider("Bins", min_value=1, max_value=100)
+        data = np.random.randn(1000)
+        fig, ax = plt.subplots(1, 1)
+        ax.hist(data, bins=bins, edgecolor="black")
         st.pyplot(fig)
 
     with cols[2]:
@@ -62,7 +77,6 @@ def render_matplotlib():
             language="python",
             line_numbers=True,
         )
-        import numpy as np
 
         x = np.random.rand(50)
         y = np.random.rand(50)

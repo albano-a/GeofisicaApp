@@ -6,8 +6,6 @@ from helpers.img_export import export_as_svg
 from components.seishub.functions.wavelets import ricker, butterworth
 import pandas as pd
 
-plt.style.use(["bmh"])
-
 
 def render_wavelet():
     st.write(
@@ -66,49 +64,89 @@ def render_wavelet():
                 tabs = st.tabs(["Time", "Frequency"])
 
                 with tabs[0]:
-                    cols = st.columns(2)
-                    with cols[0]:
-                        title = st.text_input("Change title", value="Ricker - Time")
-                    with cols[1]:
-                        color_t = st.color_picker(
-                            "Plot color", value="#3389bc", key="time"
+                    # Improved horizontal alignment for controls
+                    col1, col5, col2, col3, col4 = st.columns([2, 1, 0.5, 0.75, 0.75])
+                    with col1:
+                        title = st.text_input("Title", value="Ricker - Time")
+                    with col2:
+                        color_t = st.color_picker("Color", value="#3389bc", key="time")
+                    with col3:
+                        leg = st.checkbox("Legend?", value=True)
+                    with col4:
+                        gridd = st.checkbox("Grid?", value=True)
+                    with col5:
+                        themes = st.selectbox(
+                            "Theme",
+                            options=["default", "bmh", "ggplot", "seaborn-v0_8"],
+                            key="ricker_theme",
                         )
-                    fig, axs = plt.subplots(1, 1)
+                    plt.style.use([themes])
+
+                    fig, axs = plt.subplots()
                     axs.plot(t, rwv, color=color_t, label="Ricker")
                     axs.set_ylabel("Amplitude")
                     axs.set_xlabel("Time (ms)")
-                    leg = st.checkbox("Show legend")
-                    if leg == True:
+                    if leg:
                         axs.legend(loc="upper right")
-
+                    if gridd and themes == "default":
+                        axs.grid(
+                            True,
+                            which="major",
+                            linestyle="--",
+                            linewidth=0.5,
+                            alpha=0.7,
+                        )
+                        axs.grid(
+                            True, which="minor", linestyle=":", linewidth=0.3, alpha=0.5
+                        )
+                        axs.minorticks_on()
                     axs.set_title(title)
 
                     st.pyplot(fig)
-
                     export_as_svg(fig, fname="Ricker_time")
 
                 with tabs[1]:
-                    cols = st.columns(2)
-                    with cols[0]:
-                        title = st.text_input(
-                            "Change title", value="Ricker - Frequency", key="freq1"
+                    # Improved horizontal alignment for controls
+                    col1, col5, col2, col3, col4 = st.columns([2, 1, 0.5, 0.75, 0.75])
+                    with col1:
+                        title = st.text_input("Title", value="Ricker - Frequency")
+                    with col2:
+                        color_f = st.color_picker(
+                            "Color", value="#3389bc", key="ricker_freq_color"
                         )
-                    with cols[1]:
-                        color_t = st.color_picker(
-                            "Plot color", value="#3389bc", key="freq2"
+                    with col3:
+                        leg = st.checkbox("Legend?", value=True, key="ricker_freq_leg")
+                    with col4:
+                        gridd = st.checkbox("Grid?", value=True, key="ricker_freq_grid")
+                    with col5:
+                        themes = st.selectbox(
+                            "Theme",
+                            options=["default", "bmh", "ggplot", "seaborn-v0_8"],
+                            key="ricker_freq_theme",
                         )
-                    fig, axs = plt.subplots(1, 1)
-                    axs.plot(freqs, fft, color=color_t)
+                    plt.style.use([themes])
+
+                    fig, axs = plt.subplots()
+                    axs.plot(freqs, fft, color=color_f, label="Frequency")
                     axs.set_ylabel("Amplitude")
                     axs.set_xlabel("Frequency (Hz)")
-                    leg = st.checkbox("Show legend", key="freq")
-                    if leg == True:
+                    if leg:
                         axs.legend(loc="upper right")
-
+                    if gridd and themes == "default":
+                        axs.grid(
+                            True,
+                            which="major",
+                            linestyle="--",
+                            linewidth=0.5,
+                            alpha=0.7,
+                        )
+                        axs.grid(
+                            True, which="minor", linestyle=":", linewidth=0.3, alpha=0.5
+                        )
+                        axs.minorticks_on()
                     axs.set_title(title)
 
                     st.pyplot(fig)
-
                     export_as_svg(fig, fname="Ricker_freq")
 
             except Exception as e:
