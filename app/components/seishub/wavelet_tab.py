@@ -33,7 +33,7 @@ def render_wavelet():
         cols = st.columns(3)
 
         with cols[0]:
-            peak_freq = st.number_input("Peak Frequency")
+            peak_freq = st.number_input("Peak Frequency", min_value=0.00, value=15.00)
         with cols[1]:
             dt = st.number_input(
                 "Time (ms)",

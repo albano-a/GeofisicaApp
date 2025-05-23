@@ -4,7 +4,6 @@ import components.sidebar as sidebar
 
 from components.crystalography import generate_crystal
 from components.header import render_header
-from gettext import gettext as _
 
 render_header(
     page_title="MineralHub",
@@ -14,10 +13,10 @@ render_header(
 
 
 st.image("assets/MineralHub.png", use_container_width=True, output_format="PNG")
-language = st.selectbox("Choose your language:", ["EN", "PT"]).lower()
+
 
 st.write(
-    _(
+    (
         """
     Welcome to the Mineralogy page! 
     Here you will find apps and tools
@@ -31,20 +30,20 @@ st.write(
 )
 
 tabs_min = [
-    _("Physical Properties"),
-    _("Classification"),
-    _("Crystal Systems"),
-    _("Hardness"),
-    _("Mineral Identifier"),
+    ("Physical Properties"),
+    ("Classification"),
+    ("Crystal Systems"),
+    ("Hardness"),
+    ("Mineral Identifier"),
 ]
 tab1, tab2, tab3, tab4, tab5 = st.tabs(tabs_min)
 
 with tab1:
-    st.header(_("Physical Properties of Minerals"))
+    st.header(("Physical Properties of Minerals"))
 
-    with st.expander(_("**Streak**")):
+    with st.expander(("**Streak**")):
         st.write(
-            _(
+            (
                 """
                 The color or mark left by the mineral when scratched against a surface. 
                 
@@ -53,9 +52,9 @@ with tab1:
             ),
             unsafe_allow_html=True,
         )
-    with st.expander(_("**Hardness**")):
+    with st.expander(("**Hardness**")):
         st.write(
-            _(
+            (
                 """
             The resistance of a mineral to wear when subjected to friction or scraping.
             
@@ -64,9 +63,9 @@ with tab1:
             )
         )
 
-    with st.expander(_("**Density**")):
+    with st.expander(("**Density**")):
         st.write(
-            _(
+            (
                 """
         The relationship between the mass of a material and the volume it occupies. It is expressed by the formula:
         """
@@ -74,9 +73,9 @@ with tab1:
         )
         st.latex(r"\text{Density} = \frac{Mass}{Volume} \equiv " r" \rho = \frac{m}{V}")
 
-    with st.expander(_("**Diaphaneity**")):
+    with st.expander(("**Diaphaneity**")):
         st.write(
-            _(
+            (
                 """
                 The way the mineral interacts with light.
                 
@@ -85,9 +84,9 @@ with tab1:
             )
         )
 
-    with st.expander(_("**Cleavage**")):
+    with st.expander(("**Cleavage**")):
         st.write(
-            _(
+            (
                 """
         The way the mineral splits.
 
@@ -384,7 +383,7 @@ with tab5:
         you can use your browser's translator 
         to access the content.
         """,
-        icon="❕",
+        icon=":material/priority_high:",
     )
     st.write("Escolha as propriedades observadas:")
     st.divider()
