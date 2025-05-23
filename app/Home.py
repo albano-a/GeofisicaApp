@@ -19,20 +19,19 @@ render_header(
 
 st.image("assets/GeofisicaApp_beta.png", use_container_width=True)
 st.info(
-    "Estamos trabalhando para lançar este site em breve.",
-    icon=":material/construction:",
+    "We are working to launch this site soon.",
+    icon="🚧",
 )
 st.write(
     """
-    Explore os aplicativos abaixo:
+    Explore the applications below:
     """
 )
-
 
 with st.expander("GeofísicaCode", icon=":material/public:"):
     st.write(
         """
-        Códigos para as principais bibliotecas do Python e da própria linguagem em si.
+        Codes for the main Python libraries and the language itself.
         """
     )
     st.page_link(
@@ -40,11 +39,10 @@ with st.expander("GeofísicaCode", icon=":material/public:"):
         label=PAGE_LABEL,
     )
 
-
 with st.expander("GeologiHub", icon=":material/layers:"):
     st.write(
         """
-        Contém a tabela cronoestratigráfica e um conversor de idades geológicas
+        Contains the chronostratigraphic table and a geological age converter.
         """
     )
     st.page_link(
@@ -55,7 +53,7 @@ with st.expander("GeologiHub", icon=":material/layers:"):
 with st.expander("SeisHub", icon=":material/waves:"):
     st.write(
         """
-        Em produção
+        Under production.
         """
     )
     st.page_link(
@@ -64,20 +62,17 @@ with st.expander("SeisHub", icon=":material/waves:"):
         disabled=True,
     )
 
-
 with st.expander("MineralHub", icon=":material/diamond:"):
     st.page_link(
         page=MINERALHUB,
         label=PAGE_LABEL,
     )
-    # ste.editor().Monaco()
 
 with st.expander("PetrofisicaHub", icon=":material/stacked_line_chart:"):
     st.page_link(
         page=PETROFISICAHUB,
         label=PAGE_LABEL,
     )
-    # ste.editor().Monaco()
 
 with st.expander("CalcHub", icon=":material/functions:"):
     st.write(

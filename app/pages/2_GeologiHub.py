@@ -13,13 +13,13 @@ render_header(
 
 st.image("assets/GeologiHub.png", use_container_width=True, output_format="PNG")
 
-st.header("Tabela Cronoestratigráfica")
+st.header("Chronostratigraphic Table")
 
 # Caminho do arquivo PDF
 pdf_path = "assets/data/chrono_chart.png"
 
 # Exibir a página 1 do PDF como imagem
-st.image(pdf_path, caption="Tabela Cronoestratigráfica", use_container_width=True)
+st.image(pdf_path, caption="Chronostratigraphic Table", use_container_width=True)
 
 wb = openpyxl.load_workbook("assets/data/cronoestratigrafica.xlsx")
 ws = wb.active
@@ -76,12 +76,12 @@ for idx, row in df.iterrows():
             name=row["Age"],
             hovertemplate=(
                 f"<b>{row['Age']}</b><br>"
-                f"Idade: {age}<br>"
-                f"Época: {epoch}<br>"
-                f"Período: {period}<br>"
-                f"Éon: {row['Eon']}<br>"
-                f"Início: {start_ma} Ma<br>"
-                f"Fim: {end_ma} Ma<br>"
+                f"Age: {age}<br>"
+                f"Epoch: {epoch}<br>"
+                f"Period: {period}<br>"
+                f"Eon: {row['Eon']}<br>"
+                f"Start: {start_ma} Ma<br>"
+                f"End: {end_ma} Ma<br>"
             ),
         )
     )

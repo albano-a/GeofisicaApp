@@ -1,9 +1,10 @@
 import streamlit as st
-from components.crystalography import generate_crystal
 import components.mineral_id as mineral_id
 import components.sidebar as sidebar
 
+from components.crystalography import generate_crystal
 from components.header import render_header
+from gettext import gettext as _
 
 render_header(
     page_title="MineralHub",
@@ -11,132 +12,147 @@ render_header(
     layout="centered",
 )
 
+
 st.image("assets/MineralHub.png", use_container_width=True, output_format="PNG")
+language = st.selectbox("Choose your language:", ["EN", "PT"]).lower()
+
 st.write(
+    _(
+        """
+    Welcome to the Mineralogy page! 
+    Here you will find apps and tools
+    related to the study of minerals, 
+    their properties, classifications, 
+    and applications. Explore the available 
+    resources and deepen your knowledge about 
+    the world of mineralogy.
     """
-Bem-vindo à página de Mineralogia! Aqui você encontrará apps e ferramentas relacionadas ao estudo dos minerais, suas propriedades, classificações e aplicações.
-Explore os recursos disponíveis e aprofunde seus conhecimentos sobre o mundo da mineralogia.
-"""
+    )
 )
 
-
 tabs_min = [
-    "Propriedades Físicas",
-    "Classificação",
-    "Sistemas Cristalinos",
-    "Dureza",
-    "Identificador de Minerais",
+    _("Physical Properties"),
+    _("Classification"),
+    _("Crystal Systems"),
+    _("Hardness"),
+    _("Mineral Identifier"),
 ]
 tab1, tab2, tab3, tab4, tab5 = st.tabs(tabs_min)
 
 with tab1:
-    st.header("Propriedades Fisicas dos Minerais")
+    st.header(_("Physical Properties of Minerals"))
 
-    with st.expander("**Traço**"):
+    with st.expander(_("**Streak**")):
         st.write(
-            """
-        É a cor ou risco deixado pelo mineral quando riscado contra uma superfície. 
-        
-        Ex.: Branco, vermelho, translúcido.
-        """,
+            _(
+                """
+                The color or mark left by the mineral when scratched against a surface. 
+                
+                Ex.: White, red, translucent.
+                """
+            ),
             unsafe_allow_html=True,
         )
-    with st.expander("**Dureza**"):
+    with st.expander(_("**Hardness**")):
         st.write(
-            """
-            A resistência de um mineral ao desgaste quando submetido a fricção ou raspagem.
+            _(
+                """
+            The resistance of a mineral to wear when subjected to friction or scraping.
             
-            Ex.: de 1 (talco) a 10 (diamante).
+            Ex.: from 1 (talc) to 10 (diamond).
             """
+            )
         )
 
-    with st.expander("**Densidade**"):
+    with st.expander(_("**Density**")):
         st.write(
-            """
-        É a relação entre a massa de um material e o volume que ele ocupa. É expressa pela fórmula:
+            _(
+                """
+        The relationship between the mass of a material and the volume it occupies. It is expressed by the formula:
         """
+            )
         )
-        st.latex(
-            r"\text{Densidade} = \frac{Massa}{Volume} \equiv " r" \rho = \frac{m}{V}"
-        )
+        st.latex(r"\text{Density} = \frac{Mass}{Volume} \equiv " r" \rho = \frac{m}{V}")
 
-    with st.expander("**Difaneidade**"):
+    with st.expander(_("**Diaphaneity**")):
         st.write(
-            """
-        É a forma como o mineral reage a luz.
-        
-        Ex.: Transparente, Translúcido ou Opaco.
-        """
+            _(
+                """
+                The way the mineral interacts with light.
+                
+                Ex.: Transparent, Translucent, or Opaque.
+                """
+            )
         )
 
-    with st.expander("**Clivagem**"):
+    with st.expander(_("**Cleavage**")):
         st.write(
-            """
-        É a forma como o mineral se divide.
+            _(
+                """
+        The way the mineral splits.
 
-        Ex.: Perfeita, Imperfeita, Ausente.
+        Ex.: Perfect, Imperfect, Absent.
         """
+            )
         )
 
 with tab2:
-    st.header("Tabela de Classificação dos Minerais")
-    st.write(
-        "Abaixo está uma tabela com exemplos de minerais e algumas de suas propriedades:"
-    )
+    st.header("Mineral Classification Table")
+    st.write("Below is a table with examples of minerals and some of their properties:")
 
     html = """
     <table border="1" style="border-collapse: collapse; width: 100%; text-align: center;">
         <thead style="background:#bc1077">
             <tr>
-                <th>Classificação</th>
-                <th colspan="2">Classe</th>
+                <th>Classification</th>
+                <th colspan="2">Class</th>
                 <th>Radical</th>
-                <th>Exemplos</th>
+                <th>Examples</th>
             </tr>
         </thead>
         <tbody>
             <tr>
-                <td rowspan="7">Silicatos</td>
-                <td colspan="2">Nesossilicatos</td><td>(SiO4)4-</td><td>Granada, Olivina, Cianita, Topázio</td>
+                <td rowspan="7">Silicates</td>
+                <td colspan="2">Nesosilicates</td><td>(SiO4)4-</td><td>Garnet, Olivine, Kyanite, Topaz</td>
             </tr>
             <tr>
-                <td colspan="2">Sorossilicatos</td><td>(Si2O7)6-</td><td>Epidoto</td>
+                <td colspan="2">Sorosilicates</td><td>(Si2O7)6-</td><td>Epidote</td>
             </tr>
             <tr>
-                <td colspan="2">Ciclossilicatos</td><td>(Si6O18)12-</td><td>Turmalina, Berilio</td>
+                <td colspan="2">Cyclosilicates</td><td>(Si6O18)12-</td><td>Tourmaline, Beryl</td>
             </tr>
             <tr>
-                <td rowspan="2">Isossilicatos</td><td>Cadeia simples</td><td>(Si2O6)4-</td><td>Piroxênio, Espodumênio</td>
+                <td rowspan="2">Inosilicates</td><td>Single Chain</td><td>(Si2O6)4-</td><td>Pyroxene, Spodumene</td>
             </tr>
             <tr>
-                <td>Cadeia dupla</td><td>(Si8O22)6-</td><td>Anfibólio</td>
+                <td>Double Chain</td><td>(Si8O22)6-</td><td>Amphibole</td>
             </tr>
             <tr>
-                <td colspan="2">Filossilicatos</td><td>(Si4O10)4-</td><td>Mica, Caulinita, Esmecita, Talco, Clorita</td>
+                <td colspan="2">Phyllosilicates</td><td>(Si4O10)4-</td><td>Mica, Kaolinite, Smectite, Talc, Chlorite</td>
             </tr>
             <tr>
-                <td colspan="2">Tectossilicatos</td><td>(SiO2)0</td><td>K-feldspato, Plagioclásio, Quartzo</td>
+                <td colspan="2">Tectosilicates</td><td>(SiO2)0</td><td>K-feldspar, Plagioclase, Quartz</td>
             </tr>
             <tr>
-                <td colspan="3">Óxidos</td><td>O2-</td><td>Hematita, Ileminita, Cassiderita, Psilomelano, Magnetita, Coridon</td>
+                <td colspan="3">Oxides</td><td>O2-</td><td>Hematite, Ilmenite, Cassiterite, Psilomelane, Magnetite, Corundum</td>
             </tr>
             <tr>
-                <td colspan="3">Sulfetos</td><td>S-</td><td>Esfalerita, Galena, Pirita, Molibdenita, Calcopirita</td>
+                <td colspan="3">Sulfides</td><td>S-</td><td>Sphalerite, Galena, Pyrite, Molybdenite, Chalcopyrite</td>
             </tr>
             <tr>
-                <td colspan="3">Sulfatos</td><td>SO4-</td><td>Barita, Gipsita</td>
+                <td colspan="3">Sulfates</td><td>SO4-</td><td>Barite, Gypsum</td>
             </tr>
             <tr>
-                <td colspan="3">Carbonatos</td><td>CO3-</td><td>Calcita, Dolomita</td>
+                <td colspan="3">Carbonates</td><td>CO3-</td><td>Calcite, Dolomite</td>
             </tr>
             <tr>
-                <td colspan="3">Haletos</td><td>F-, Cl-</td><td>Halita, Fluorita</td>
+                <td colspan="3">Halides</td><td>F-, Cl-</td><td>Halite, Fluorite</td>
             </tr>
             <tr>
-                <td colspan="3">Hidróxidos</td><td>(OH)-</td><td>Bauxita</td>
+                <td colspan="3">Hydroxides</td><td>(OH)-</td><td>Bauxite</td>
             </tr>
             <tr>
-                <td colspan="3">Fosfato</td><td>PO4-</td><td>Apatita</td>
+                <td colspan="3">Phosphates</td><td>PO4-</td><td>Apatite</td>
             </tr>
         </tbody>
     </table>
@@ -146,18 +162,18 @@ with tab2:
 
 with tab3:
 
-    st.header("Sistemas Cristalinos")
+    st.header("Crystal Systems")
 
-    with st.expander("**Cúbico**"):
+    with st.expander("**Cubic**"):
         st.write(
-            "Três eixos iguais e perpendiculares, formando cubos perfeitos. Também chamado de isométrico. Ex.: Pirita, Diamante, Galena."
+            "Three equal and perpendicular axes, forming perfect cubes. Also called isometric. Ex.: Pyrite, Diamond, Galena."
         )
         cols = st.columns(3)
         with cols[0]:
             st.image(
                 "https://museuhe.com.br/site/wp-content/uploads/2018/02/Pirita-6-400x400.jpg",
                 width=200,
-                caption="**Pirita**",
+                caption="**Pyrite**",
             )
         with cols[1]:
             st.image("assets/cristalinos/cubico.png", width=200)
@@ -168,16 +184,14 @@ with tab3:
                 caption="**Galena**",
             )
 
-    with st.expander("**Monoclínico**"):
-        st.write(
-            "Três eixos desiguais, dois perpendiculares e um inclinado. Ex.: Gipsita."
-        )
+    with st.expander("**Monoclinic**"):
+        st.write("Three unequal axes, two perpendicular and one inclined. Ex.: Gypsum.")
         cols = st.columns(3, gap="medium")
         with cols[0]:
             st.image(
                 "https://museuhe.com.br/site/wp-content/uploads/2017/09/Gipsita_2-400x400.jpg",
                 width=200,
-                caption="**Gipsita**",
+                caption="**Gypsum**",
             )
         with cols[1]:
             st.image("assets/cristalinos/monoclinico.png", width=200)
@@ -185,19 +199,19 @@ with tab3:
             st.image(
                 "https://museuhe.com.br/site/wp-content/uploads/2017/09/Gipsita_6-400x400.jpg",
                 width=200,
-                caption="**Gipsita**",
+                caption="**Gypsum**",
             )
 
-    with st.expander("**Triclínico**"):
+    with st.expander("**Triclinic**"):
         st.write(
-            "Três eixos desiguais e inclinados entre si, sem ângulos retos. Ex.: Turquesa."
+            "Three unequal and inclined axes, with no right angles. Ex.: Turquoise."
         )
         cols = st.columns(3)
         with cols[0]:
             st.image(
                 "https://kaviah.com/wp-content/uploads/2021/02/turquesa-capa.jpg",
                 width=200,
-                caption="**Turquesa**",
+                caption="**Turquoise**",
             )
         with cols[1]:
             st.image("assets/cristalinos/triclinico.png", width=200)
@@ -205,17 +219,17 @@ with tab3:
             st.image(
                 "https://i0.wp.com/geologyscience.com/wp-content/uploads/2019/07/Turquoise-pyrite-quartz.jpeg?resize=640%2C425&ssl=1",
                 width=200,
-                caption="**Turquesa**",
+                caption="**Turquoise**",
             )
 
-    with st.expander("**Ortorrômbico**"):
-        st.write("Três eixos desiguais, todos perpendiculares entre si. Ex.: Topázio.")
+    with st.expander("**Orthorhombic**"):
+        st.write("Three unequal axes, all perpendicular to each other. Ex.: Topaz.")
         cols = st.columns(3)
         with cols[0]:
             st.image(
                 "https://museuhe.com.br/site/wp-content/uploads/2019/01/Topazio-16-400x400.jpg",
                 width=200,
-                caption="**Topázio**",
+                caption="**Topaz**",
             )
         with cols[1]:
             st.image("assets/cristalinos/ortorrombico.png", width=200)
@@ -223,19 +237,19 @@ with tab3:
             st.image(
                 "https://museuhe.com.br/site/wp-content/uploads/2018/02/Top%C3%A1zio-2-400x400.jpg",
                 width=200,
-                caption="**Topázio**",
+                caption="**Topaz**",
             )
 
-    with st.expander("**Romboédrico**"):
+    with st.expander("**Rhombohedral**"):
         st.write(
-            "Três eixos iguais com ângulos iguais mas diferentes de 90°. Ex.: Calcita."
+            "Three equal axes with equal angles but different from 90°. Ex.: Calcite."
         )
         cols = st.columns(3)
         with cols[0]:
             st.image(
                 "https://museuhe.com.br/site/wp-content/uploads/2019/02/Calcita-17-400x400.jpg",
                 width=200,
-                caption="**Calcita**",
+                caption="**Calcite**",
             )
         with cols[1]:
             st.image("assets/cristalinos/romboedrico.png", width=200)
@@ -243,17 +257,17 @@ with tab3:
             st.image(
                 "https://museuhe.com.br/site/wp-content/uploads/2019/02/Calcita-16-400x400.jpg",
                 width=200,
-                caption="**Calcita**",
+                caption="**Calcite**",
             )
 
     with st.expander("**Tetragonal**"):
-        st.write("Dois eixos iguais, um diferente, todos perpendiculares. Ex.: Zircão.")
+        st.write("Two equal axes, one different, all perpendicular. Ex.: Zircon.")
         cols = st.columns(3)
         with cols[0]:
             st.image(
                 "https://museuhe.com.br/site/wp-content/uploads/2020/03/zircao-1-400x400.jpg",
                 width=200,
-                caption="**Zircão**",
+                caption="**Zircon**",
             )
         with cols[1]:
             st.image("assets/cristalinos/tetragonal.png", width=200)
@@ -261,19 +275,19 @@ with tab3:
             st.image(
                 "https://museuhe.com.br/site/wp-content/uploads/2020/03/zircao-2-400x400.jpg",
                 width=200,
-                caption="**Zircão**",
+                caption="**Zircon**",
             )
 
     with st.expander("**Hexagonal**"):
         st.write(
-            "Dois eixos iguais em 120°, e um eixo diferente perpendicular a eles. Ex.: Berilo."
+            "Two equal axes at 120°, and one different axis perpendicular to them. Ex.: Beryl."
         )
         cols = st.columns(3)
         with cols[0]:
             st.image(
                 "https://museuhe.com.br/site/wp-content/uploads/2019/02/Berilo-26-400x400.jpg",
                 width=200,
-                caption="**Berilo**",
+                caption="**Beryl**",
             )
         with cols[1]:
             st.image("assets/cristalinos/hexagonal.png", width=200)
@@ -281,22 +295,22 @@ with tab3:
             st.image(
                 "https://museuhe.com.br/site/wp-content/uploads/2019/02/Berilo-27-400x400.jpg",
                 width=200,
-                caption="**Berilo**",
+                caption="**Beryl**",
             )
 
-    st.header("Visualizador de Sistema cristalino")
+    st.header("Crystal System Viewer")
 
     type = st.pills(
-        label="Escolha um sistema cristalino:",
-        default="Cúbico",
+        label="Choose a crystal system:",
+        default="Cubic",
         options=[
-            "Cúbico",
+            "Cubic",
             "Tetragonal",
-            "Ortorrômbico",
+            "Orthorhombic",
             "Hexagonal",
-            "Triclínico",
-            "Monoclínico",
-            "Romboédrico",
+            "Triclinic",
+            "Monoclinic",
+            "Rhombohedral",
         ],
     )
 
@@ -304,56 +318,56 @@ with tab3:
     st.plotly_chart(fig)
 
 with tab4:
-    st.header("Dureza")
+    st.header("Hardness")
 
     html_dureza = """
     <table border="1" style="border-collapse: collapse; width: 100%; text-align: center;">
         <thead style="background:#bc1077">
             <tr>
-                <th>Valor de Dureza</th>
-                <th>Mineral exemplo</th>
+                <th>Hardness Value</th>
+                <th>Example Mineral</th>
             </tr>
         </thead>
         <tbody>
             <tr>
                 <td>1</td>
-                <td>Talco</td>
+                <td>Talc</td>
             </tr>
             <tr>
                 <td>2</td>
-                <td>Gipsita</td>
+                <td>Gypsum</td>
             </tr>
             <tr>
                 <td>3</td>
-                <td>Calcita</td>
+                <td>Calcite</td>
             </tr>
             <tr>
                 <td>4</td>
-                <td>Fluorita</td>
+                <td>Fluorite</td>
             </tr>
             <tr>
                 <td>5</td>
-                <td>Apatita</td>
+                <td>Apatite</td>
             </tr>
             <tr>
                 <td>6</td>
-                <td>Feldspato</td>
+                <td>Feldspar</td>
             </tr>
             <tr>
                 <td>7</td>
-                <td>Quartzo</td>
+                <td>Quartz</td>
             </tr>
             <tr>
                 <td>8</td>
-                <td>Topázio</td>
+                <td>Topaz</td>
             </tr>
             <tr>
                 <td>9</td>
-                <td>Coríndon</td>
+                <td>Corundum</td>
             </tr>
             <tr>
                 <td>10</td>
-                <td>Diamante</td>
+                <td>Diamond</td>
             </tr>
         </tbody>
     </table>
@@ -362,8 +376,16 @@ with tab4:
     st.markdown(html_dureza, unsafe_allow_html=True)
 
 with tab5:
-    st.header("Identificador de Minerais")
-
+    st.header("Mineral Identifier")
+    st.info(
+        """
+        This section is not yet available in English. 
+        It is a work in progress. Meanwhile, 
+        you can use your browser's translator 
+        to access the content.
+        """,
+        icon="❕",
+    )
     st.write("Escolha as propriedades observadas:")
     st.divider()
 

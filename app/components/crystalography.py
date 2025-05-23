@@ -1,9 +1,18 @@
 import plotly.graph_objects as go
 import streamlit as st
 
+"""
+"Cubic",
+"Tetragonal",
+"Orthorhombic",
+"Hexagonal",
+"Triclinic",
+"Monoclinic",
+"Rhombohedral",
+"""
 
 def generate_crystal(tipo):
-    if tipo == "Cúbico":
+    if tipo == "Cubic":
         vertices = [
             [0, 0, 0],
             [1, 0, 0],
@@ -25,7 +34,7 @@ def generate_crystal(tipo):
             [1, 1, 2],
             [0, 1, 2],
         ]
-    elif tipo == "Ortorrômbico":
+    elif tipo == "Orthorhombic":
         vertices = [
             [0, 0, 0],
             [2, 0, 0],
@@ -47,7 +56,7 @@ def generate_crystal(tipo):
             [1.5, 0.866, 2],
             [0.5, 0.866, 2],
         ]
-    elif tipo == "Triclínico":
+    elif tipo == "Triclinic":
         vertices = [
             [0, 0, 0],
             [1, 0.2, 0],
@@ -58,7 +67,7 @@ def generate_crystal(tipo):
             [1.2, 1, 1.5],
             [0.2, 1, 1.5],
         ]
-    elif tipo == "Monoclínico":
+    elif tipo == "Monoclinic":
         vertices = [
             [0, 0, 0],
             [1, 0.2, 0],
@@ -69,7 +78,7 @@ def generate_crystal(tipo):
             [1, 1.2, 2],
             [0, 1, 2],
         ]
-    elif tipo == "Romboédrico":
+    elif tipo == "Rhombohedral":
         vertices = [
             [0, 0, 0],
             [1, 0.2, 0],
@@ -82,7 +91,7 @@ def generate_crystal(tipo):
         ]
     else:
         # Valor inválido para tipo
-        st.error(f"Sistema cristalino '{tipo}' não reconhecido.")
+        st.error(f"Crystal system '{tipo}' not recognized.")
         return go.Figure()  # Retorna um gráfico vazio
 
     edges = [

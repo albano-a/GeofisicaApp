@@ -6,6 +6,6 @@ maxUploadSize = 2048
 base="dark"
 primaryColor = "#bc1077"
 backgroundColor = "#14161a"
-secondaryBackgroundColor = "#222222"
+secondaryBackgroundColor = "#121317"
 textColor = "#ebecf0"
 font = "sans serif"

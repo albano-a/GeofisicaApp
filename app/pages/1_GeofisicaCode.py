@@ -16,18 +16,17 @@ render_header(
     layout="wide",
     menu_items={
         "About": """
-        Esse aplicativo faz parte do ecossistema
-        do GeofisicaHub.
+        This application is part of the GeofisicaHub ecosystem.
         
-        #### Desenvolvido por André Albano
+        #### Developed by André Albano
         """
     },
 )
 
 st.image("assets/GeofisicaCode.svg", width=600, output_format="PNG")
-st.info(
-    "Estamos trabalhando para completar esta página com mais códigos.",
-    icon=":material/construction:",
+st.warning(
+    "This page is under construction. More code examples will be added soon!",
+    icon="🚧",
 )
 
 list_of_tabs_geofisicacode = [

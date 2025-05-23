@@ -10,3 +10,5 @@ pdf2image
 Pillow
 sympy
 scipy
+RestrictedPython
+streamlit-ace
