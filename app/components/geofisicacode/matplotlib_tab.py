@@ -53,7 +53,7 @@ def render_matplotlib():
 
         st.write("Styling")
         st.code(
-            """
+            r"""
             import numpy as np
             
             x = np.linspace(-1, 1, 100)
@@ -125,20 +125,20 @@ def render_matplotlib():
         st.write("##### 3D plot")
         st.code(
             """
-            import matplotlib.pyplot as plt
-            from mpl_toolkits.mplot3d import Axes3D
-            import numpy as np
+import matplotlib.pyplot as plt
+from mpl_toolkits.mplot3d import Axes3D
+import numpy as np
 
-            fig = plt.figure()
-            ax = fig.add_subplot(111, projection='3d')
+fig = plt.figure()
+ax = fig.add_subplot(111, projection='3d')
 
-            x = np.linspace(-5, 5, 100)
-            y = np.linspace(-5, 5, 100)
-            X, Y = np.meshgrid(x, y)
-            Z = np.sin(np.sqrt(X**2 + Y**2))
+x = np.linspace(-5, 5, 100)
+y = np.linspace(-5, 5, 100)
+X, Y = np.meshgrid(x, y)
+Z = np.sin(np.sqrt(X**2 + Y**2))
 
-            ax.plot_surface(X, Y, Z, cmap='coolwarm')
-            plt.show()
+ax.plot_surface(X, Y, Z, cmap='coolwarm')
+plt.show()
             """
         )
         fig = plt.figure()
@@ -157,11 +157,11 @@ def render_matplotlib():
         st.write("##### Scatter plot")
         st.code(
             """
-            import numpy as np
-            x = np.random.rand(50)
-            y = np.random.rand(50)
-            plt.scatter(x, y)
-            plt.show()
+import numpy as np
+x = np.random.rand(50)
+y = np.random.rand(50)
+plt.scatter(x, y)
+plt.show()
             """,
             language="python",
             line_numbers=True,

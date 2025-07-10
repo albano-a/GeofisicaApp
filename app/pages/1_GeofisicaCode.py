@@ -28,6 +28,9 @@ st.warning(
     "This page is under construction. More code examples will be added soon!",
     icon="🚧",
 )
+st.write(
+    "🐍 Python is great for data science! Here's a cheat sheet with useful code examples."
+)
 
 list_of_tabs_geofisicacode = [
     "Base",

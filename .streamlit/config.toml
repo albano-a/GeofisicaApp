@@ -1,9 +1,10 @@
 [server]
 runOnSave = true
 maxUploadSize = 2048
+fileWatcherType = "poll"
 
 [theme]
-base="dark"
+base = "dark"
 primaryColor = "#bc1077"
 backgroundColor = "#14161a"
 secondaryBackgroundColor = "#121317"
