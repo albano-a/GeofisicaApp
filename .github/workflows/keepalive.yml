@@ -14,5 +14,5 @@ jobs:
           node-version: "20"
       - run: |
           npm install puppeteer
-          echo "const p=require('puppeteer');(async()=>{const b=await p.launch({args:['--no-sandbox']});const s=await b.newPage();await s.goto('https://geofisica.streamlit.app');await s.waitForTimeout(10000);await b.close();})();" > ping.js
+          echo "const p=require('puppeteer');(async()=>{const b=await p.launch({args:['--no-sandbox']});const s=await b.newPage();await s.goto('https://geofisica.streamlit.app');await new Promise(r=>setTimeout(r,10000));await b.close();})();" > ping.js
           node ping.js
