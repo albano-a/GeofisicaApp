@@ -1,0 +1,14 @@
+name: Keep Streamlit Awake
+on:
+  schedule:
+    - cron: "*/1 * * * *"
+jobs:
+  ping:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/setup-node@v3
+        with: { node-version: "20" }
+      - run: |
+          npm install puppeteer
+          echo "const p=require('puppeteer');(async()=>{const b=await p.launch({args:['--no-sandbox']});const s=await b.newPage();await s.goto('https://geofisica.streamlit.app');await s.waitForTimeout(10000);await b.close();})();" > ping.js
+          node ping.js
