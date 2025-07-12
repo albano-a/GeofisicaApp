@@ -1,4 +1,4 @@
-import streamlit as st
+import streamlit as st # type: ignore
 from components.header import render_header
 
 GEOFISICACODE = "pages/1_GeofisicaCode.py"
@@ -86,6 +86,7 @@ with st.expander("CalcHub", icon=":material/functions:"):
         label=PAGE_LABEL,
         disabled=True,
     )
+
 
 with st.expander("FisicaHub", icon=":material/orbit:"):
     st.page_link(
