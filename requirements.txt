@@ -12,3 +12,4 @@ sympy
 scipy
 RestrictedPython
 streamlit-ace
+qrcode
