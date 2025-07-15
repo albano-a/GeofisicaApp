@@ -39,6 +39,7 @@ list_of_tabs_geofisicacode = [
     "Numpy",
     "Matplotlib",
     "Pandas",
+    "Segyio",
 ]
 tabs_geofisicacode = st.tabs(list_of_tabs_geofisicacode)
 
@@ -59,3 +60,6 @@ with tabs_geofisicacode[4]:
 
 with tabs_geofisicacode[5]:
     render_pandas()
+
+with tabs_geofisicacode[6]:
+    pass
