@@ -11,38 +11,48 @@ def render_matplotlib():
         st.write("##### Importation")
         st.code(
             """
-            import matplotlib.pyplot as plt
-            """,
+# Most used alias
+import matplotlib.pyplot as plt""",
             language="python",
             line_numbers=True,
         )
         st.write("##### Simple plot")
-        st.code(
-            """
-            x = [1, 2, 3]
-            y = [2, 4, 1]
-            plt.plot(x, y)
-            plt.show()
-            """,
-            language="python",
-            line_numbers=True,
-        )
-        x = [1, 2, 3]
-        y = [2, 4, 1]
-        fig, ax = plt.subplots(1, 1)
-        ax.plot(x, y)
-        st.pyplot(fig)
+        subcols = st.columns(2)
+        with subcols[0]:
+            x = st.text_input("Enter list 1", value="1, 2, 3").split(",")
+            x = [int(i) for i in x]
+        with subcols[1]:
+            y = st.text_input("Enter list 2", value="3, 4, 5").split(",")
+            y = [int(j) for j in y]
 
+        if not x or not y:
+            st.warning("Both lists must have at least one number.")
+        elif len(x) != len(y):
+            st.warning("Lists must be the same length.")
+        else:
+            st.code(
+                f"""
+x = {x}
+y = {y}
+plt.plot(x, y)
+plt.show()""",
+                language="python",
+                line_numbers=True,
+            )
+
+            fig, ax = plt.subplots()
+            ax.plot(x, y)
+            st.pyplot(fig)
         st.write("##### Heatmap")
         st.code(
             """
-            import matplotlib.pyplot as plt
-            import numpy as np
+import matplotlib.pyplot as plt
+import numpy as np
 
-            data = np.random.rand(50, 50)
-            plt.imshow(data, cmap='viridis', aspect='auto')
-            plt.colorbar()
-            plt.show()
+data = np.random.rand(50, 50)
+plt.imshow(data, cmap='viridis', aspect='auto')
+plt.colorbar()
+plt.show()
             """
         )
         cmap = st.selectbox("Colormap", ["viridis", "gray", "rainbow", "RdBu"])
@@ -52,38 +62,46 @@ def render_matplotlib():
         st.pyplot(fig)
 
         st.write("Styling")
+        subcols2 = st.columns(2)
+        with subcols2[0]:
+            color = st.text_input("Color (red, C4, #00ff00)", value="#0000ff")
+        with subcols2[1]:
+            grid = st.checkbox("Grid", value=True)
+
         st.code(
-            r"""
-            import numpy as np
-            
-            x = np.linspace(-1, 1, 100)
-            y = np.sin(x)
+            rf"""
+import numpy as np
 
-            fig, axs = plt.subplots(1, 1)
-            axs.plot(x, y, color="C3")
-            axs.set_title("Sine of X", fontsize=18)
-            axs.set_ylabel(r"$\sin(x)$")
-            axs.set_xlabel("Values of X", fontsize=14)
+x = np.linspace(-1, 1, 100)
+y = np.sin(x)
 
-            axs.grid(True, which="major", linestyle="--", linewidth=0.5, alpha=0.7)
-            axs.grid(True, which="minor", linestyle=":", linewidth=0.3, alpha=0.5)
-            axs.minorticks_on()
+fig, axs = plt.subplots(1, 1)
+axs.plot(x, y, color="{color}")
+axs.set_title("Sine of X", fontsize=18)
+axs.set_ylabel(r"$\sin(x)$")
+axs.set_xlabel("Values of X", fontsize=14)
 
-            plt.tight_layout()
-            plt.show()
+axs.grid({grid}, which="major", linestyle="--", linewidth=0.5, alpha=0.7)
+axs.grid({grid}, which="minor", linestyle=":", linewidth=0.3, alpha=0.5)
+axs.minorticks_on()
+
+plt.tight_layout()
+plt.show()
             """
         )
         x = np.linspace(-1, 1, 100)
         y = np.sin(x)
 
         fig, axs = plt.subplots(1, 1)
-        axs.plot(x, y, color="C3")
+        axs.plot(x, y, color=color)
         axs.set_title("Sine of X", fontsize=18)
         axs.set_ylabel(r"$\sin(x)$")
         axs.set_xlabel("Values of X", fontsize=14)
 
-        axs.grid(True, which="major", linestyle="--", linewidth=0.5, alpha=0.7)
-        axs.grid(True, which="minor", linestyle=":", linewidth=0.3, alpha=0.5)
+        if grid == True:
+            axs.grid(True, which="major", linestyle="--", linewidth=0.5, alpha=0.7)
+            axs.grid(True, which="minor", linestyle=":", linewidth=0.3, alpha=0.5)
+
         axs.minorticks_on()
 
         plt.tight_layout()
@@ -94,10 +112,10 @@ def render_matplotlib():
         st.write("##### Bar Plot")
         st.code(
             """
-            names = ["A", "B", "C"]
-            values = [10, 20, 15]
-            plt.bar(names, values)
-            plt.show()
+names = ["A", "B", "C"]
+values = [10, 20, 15]
+plt.bar(names, values)
+plt.show()
             """,
             language="python",
             line_numbers=True,
@@ -111,9 +129,9 @@ def render_matplotlib():
         st.write("##### Histogram")
         st.code(
             """
-            data = np.random.randn(1000)
-            plt.hist(data, bins=30)
-            plt.show()
+data = np.random.randn(1000)
+plt.hist(data, bins=30)
+plt.show()
             """
         )
         bins = st.slider("Bins", min_value=1, value=30, max_value=100)
@@ -181,11 +199,11 @@ plt.show()
         sizeC = 100 - sizeA - sizeB
         st.code(
             f"""
-            sizes = [{sizeA}, {sizeB}, {sizeC}]
-            labels = ['A', 'B', 'C']
-            
-            plt.pie(sizes, labels=labels)
-            plt.show()
+sizes = [{sizeA}, {sizeB}, {sizeC}]
+labels = ['A', 'B', 'C']
+
+plt.pie(sizes, labels=labels)
+plt.show()
             """
         )
         sizes = [sizeA, sizeB, sizeC]
@@ -194,3 +212,43 @@ plt.show()
 
         ax.pie(sizes, labels=labels, autopct="%1.1f%%")
         st.pyplot(fig)
+
+        st.write("##### Different styles")
+        styles = st.selectbox(
+            "Choose style",
+            options=[
+                "default",
+                "classic",
+                "bmh",
+                "Solarize_Light2",
+                "dark_background",
+                "fast",
+                "fivethirtyeight",
+                "ggplot",
+                "grayscale",
+                "petroff10",
+                "seaborn-v0_8",
+            ],
+        )
+        with plt.style.context([styles]):
+            st.code(
+                """
+import numpy as np
+x = np.linspace(-5, 5, 100)
+y = np.sin(x)
+z = np.cos(x)
+
+with plt.style.context(['bmh']):
+    fig, ax = plt.subplots()
+    ax.plot(x, y)
+    ax.plot(x, z)
+    plt.show()""",
+                language="python",
+            )
+            x = np.linspace(-5, 5, 100)
+            y = np.sin(x)
+            z = np.cos(x)
+            fig, ax = plt.subplots()
+            ax.plot(x, y)
+            ax.plot(x, z)
+            st.pyplot(fig)
