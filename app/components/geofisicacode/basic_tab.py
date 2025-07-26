@@ -5,7 +5,7 @@ def render_base():
     cols = st.columns(3)
 
     with cols[0]:
-        st.subheader("Básico")
+        st.subheader("Basic")
         st.write("##### Print to the screen:")
         st.code(
             """print("Hello World")\n""" """print("2025")""",
@@ -20,40 +20,40 @@ def render_base():
             line_numbers=True,
         )
 
-        st.write("##### Tipos de variáveis")
+        st.write("##### Variable types")
         st.code(
-            """x = 10       # int\npi = 3.14    # float\nnome = "Ana" # string\nvivo = True  # bool
+            """x = 10       # int\npi = 3.14    # float\nname = "Ana" # string\nalive = True  # bool
             """,
             language="python",
             line_numbers=True,
         )
 
-        st.write("##### Listas")
+        st.write("##### Lists")
         st.code(
             """
-frutas = ["Maçã", "Pêssego", "Abacate"]
+frutas = ["Apple", "Peach", "Avocado"]
 print(frutas)
-# output: ["Maçã", "Pêssego", "Abacate"]
+# output: ["Apple", "Peach", "Avocado"]
             """,
             language="python",
             line_numbers=True,
         )
 
-        st.write("##### Dicionário")
+        st.write("##### Dictionary")
         st.code(
             """
 pessoa = {
-    "nome": "João",
-    "idade": 30
+    "name": "John",
+    "age": 30
 }
-print(pessoa["nome"])
-# output: João
+print(pessoa["name"])
+# output: John
             """,
             language="python",
             line_numbers=True,
         )
 
-        st.write("##### Operador lógico")
+        st.write("##### Logical operator")
         st.code(
             """
 x = 5
@@ -63,17 +63,17 @@ print(x > 3 and x < 10)  # output: True
             line_numbers=True,
         )
 
-        st.write("##### Input do usuário")
+        st.write("##### User input")
         st.code(
             """
-nome = input("Digite seu nome: ")
-print(f"Olá, {nome}!")
+name = input("Enter your name: ")
+print(f"Hello, {name}!")
             """,
             language="python",
             line_numbers=True,
         )
 
-        st.write("##### Concatenação e Replicação")
+        st.write("##### Concatenation")
         st.code(
             """
 print('Alice' * 5)
@@ -83,7 +83,7 @@ print('Alice' * 5)
             line_numbers=True,
         )
 
-        st.write("##### Número de elementos")
+        st.write("##### Element length")
         st.code(
             """
 len('hello') # LENgth
@@ -137,7 +137,7 @@ print(n)
             line_numbers=True,
         )
 
-        st.write("##### Conversão de Tipos")
+        st.write("##### Type conversion")
         st.code(
             """
 a = "10" # str

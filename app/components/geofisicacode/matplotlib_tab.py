@@ -8,7 +8,7 @@ def render_matplotlib():
     cols = st.columns(3)
 
     with cols[0]:
-        st.write("##### Importation")
+        st.write("##### Import module")
         st.code(
             """
 # Most used alias

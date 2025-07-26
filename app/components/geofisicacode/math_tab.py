@@ -6,7 +6,7 @@ def render_math():
     cols = st.columns(3)
 
     with cols[0]:
-        st.write("Para importar a biblioteca")
+        st.write("##### Import module")
         st.code(
             """
 # To use any library in Python
@@ -17,7 +17,7 @@ import math as m    # with alias
             language="python",
             line_numbers=True,
         )
-        st.write("Calculate seno, cosseno, e tangente:")
+        st.write("##### Calculate sine, cosine, and tangent:")
         st.code(
             f"""
 # these angles are being calculated in radians
@@ -29,7 +29,7 @@ math.tan(angle) # {math.tan(30):.6f}...
             language="python",
             line_numbers=True,
         )
-        st.write("Calculate arc sine, arc cosine, and arc tangent:")
+        st.write("##### Calculate arc sine, arc cosine, and arc tangent:")
         st.code(
             f"""
 math.asin(0.5) # {math.asin(0.5):.6f}...
@@ -44,7 +44,7 @@ math.atan2(y, angle)
         )
 
     with cols[1]:
-        st.write("Convert degrees to radians and vice versa:")
+        st.write("##### Convert degrees to radians and vice versa:")
         st.code(
             f"""
 angle_rad = math.radians(30)
@@ -56,7 +56,7 @@ angle_deg = math.degrees(0.5)
             line_numbers=True,
         )
 
-        st.write(r"Value of π, $\sqrt{}$ and $\log$:")
+        st.write(r"##### Value of π, $\sqrt{}$ and $\log$:")
         st.code(
             f"""
 math.pi # {math.pi}
@@ -67,7 +67,7 @@ math.log(100, 10) # {math.log(100, 10)}
             line_numbers=True,
         )
 
-        st.write(r"Math constants")
+        st.write(r"##### Math constants")
         st.code(
             f"""
 math.pi         # {math.pi}
@@ -81,7 +81,7 @@ math.nan        # {math.nan}
         )
 
     with cols[2]:
-        st.write("Rounding functions")
+        st.write("##### Rounding functions")
         n1 = 5.2
         st.code(
             f"""
@@ -94,7 +94,7 @@ math.trunc(n1) # {math.trunc(n1)}
             line_numbers=True,
         )
 
-        st.write(r"Exponential and logarithmic functions")
+        st.write(r"##### Exponential and logarithmic functions")
         n2 = 4
         st.code(
             f"""
@@ -109,7 +109,7 @@ math.log2(x) # {math.log2(n2)}
             line_numbers=True,
         )
         a, b, c = 3, 4, 5
-        st.write(f"Number theory")
+        st.write(f"##### Number theory")
         st.code(
             f"""
 a, b, c = 3, 4, 5
