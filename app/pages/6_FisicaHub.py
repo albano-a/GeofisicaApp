@@ -9,7 +9,7 @@ render_header(
     layout="centered",
 )
 
-st.image("assets/FisicaHub.png", use_container_width=True, output_format="PNG")
+st.image("assets/FisicaHub.png", width="stretch", output_format="PNG")
 
 st.info(
     "Estamos trabalhando para lançar esta página em breve.",

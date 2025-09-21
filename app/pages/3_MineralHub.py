@@ -12,7 +12,7 @@ render_header(
 )
 
 
-st.image("assets/MineralHub.png", use_container_width=True, output_format="PNG")
+st.image("assets/MineralHub.png", width="stretch", output_format="PNG")
 
 
 st.write(

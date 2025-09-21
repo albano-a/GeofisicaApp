@@ -58,7 +58,7 @@ def render_wavelet():
                     data=csv,
                     file_name=f"ricker_{peak_freq}.txt",
                     mime="text/plain",
-                    use_container_width=True,
+                    width="stretch",
                 )
 
                 tabs = st.tabs(["Time", "Frequency"])
@@ -197,7 +197,7 @@ def render_wavelet():
                     data=csv,
                     file_name=f"butter_{peak_freq}.txt",
                     mime="text/plain",
-                    use_container_width=True,
+                    width="stretch",
                 )
 
                 tabs = st.tabs(["Time", "Frequency"])

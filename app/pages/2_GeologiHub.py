@@ -11,7 +11,7 @@ render_header(
     layout="centered",
 )
 
-st.image("assets/GeologiHub.png", use_container_width=True, output_format="PNG")
+st.image("assets/GeologiHub.png", width="stretch", output_format="PNG")
 
 st.header("Chronostratigraphic Table")
 
@@ -19,7 +19,7 @@ st.header("Chronostratigraphic Table")
 pdf_path = "assets/data/chrono_chart.png"
 
 # Exibir a página 1 do PDF como imagem
-st.image(pdf_path, caption="Chronostratigraphic Table", use_container_width=True)
+st.image(pdf_path, caption="Chronostratigraphic Table", width="stretch")
 
 wb = openpyxl.load_workbook("assets/data/cronoestratigrafica.xlsx")
 ws = wb.active

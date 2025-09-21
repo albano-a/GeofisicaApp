@@ -24,10 +24,7 @@ render_header(
 )
 
 st.image("assets/GeofisicaCode.svg", width=600, output_format="PNG")
-st.warning(
-    "This page is under construction. More code examples will be added soon!",
-    icon="🚧",
-)
+st.toast("This page is continuously maintained and improved.", duration="infinite")
 st.write(
     "🐍 Python is great for data science! Here's a cheat sheet with useful code examples."
 )

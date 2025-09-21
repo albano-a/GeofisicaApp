@@ -19,4 +19,4 @@ def show_pdf_page_as_image(pdf_path, page_number=0, dpi=500):
     buf.seek(0)
 
     # Exibir a imagem no Streamlit
-    st.image(buf, caption="Tabela", use_container_width=True)
+    st.image(buf, caption="Tabela", width="stretch")

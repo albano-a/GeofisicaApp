@@ -1,5 +1,6 @@
-import streamlit as st # type: ignore
+import streamlit as st  # type: ignore
 from components.header import render_header
+import components.sidebar as sidebar
 
 GEOFISICACODE = "pages/1_GeofisicaCode.py"
 GEOLOGIHUB = "pages/2_GeologiHub.py"
@@ -10,18 +11,9 @@ FISICAHUB = "pages/6_FisicaHub.py"
 SEISHUB = "pages/8_SeisHub.py"
 PAGE_LABEL = "Acessar aplicativo :material/arrow_right_alt:"
 
-render_header(
-    page_title="GeofisicaApp",
-    page_icon="assets/geofisicahub_favicons.svg",
-    layout="centered",
-)
+st.image("assets/GeofisicaApp_beta.png", width="stretch")
+st.toast("We are working to launch this site soon.", icon="🚧", duration="infinite")
 
-
-st.image("assets/GeofisicaApp_beta.png", use_container_width=True)
-st.info(
-    "We are working to launch this site soon.",
-    icon="🚧",
-)
 st.write(
     """
     Explore the applications below:

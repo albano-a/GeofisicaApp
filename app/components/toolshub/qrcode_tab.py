@@ -12,7 +12,7 @@ def render_qrcode():
     st.subheader("Generate QR Code to any link you have.")
     link = st.text_input("Link")
 
-    if st.button("Generate", use_container_width=True):
+    if st.button("Generate", width="stretch"):
         if link.strip():
             # Generate QR Code
             qr = qrcode.QRCode(
@@ -38,7 +38,7 @@ def render_qrcode():
                 data=buf.getvalue(),
                 file_name="qrcode.png",
                 mime="image/png",
-                use_container_width=True,
+                width="stretch",
             )
         else:
             st.warning("Please enter a valid link.")

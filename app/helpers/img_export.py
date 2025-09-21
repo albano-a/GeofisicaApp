@@ -21,6 +21,6 @@ def export_as_svg(fig, fname="placeholder", fformat="svg", dpi=500):
         data=data,
         file_name=f"{fname}.{fformat}",
         mime=mime,
-        use_container_width=True,
+        width="stretch",
     )
     buf.close()

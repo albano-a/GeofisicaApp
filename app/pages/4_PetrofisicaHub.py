@@ -18,9 +18,11 @@ render_header(
     layout="centered",
 )
 
-st.image("assets/PetrofisicaHub.png", use_container_width=True, output_format="PNG")
+st.image("assets/PetrofisicaHub.png", width="stretch", output_format="PNG")
 
-st.write("Welcome to PetrofisicaHub! This page contains several equations to calculate porosity, permeability, water saturation and so on.")
+st.write(
+    "Welcome to PetrofisicaHub! This page contains several equations to calculate porosity, permeability, water saturation and so on."
+)
 
 tabs_list = [
     "Porosity",

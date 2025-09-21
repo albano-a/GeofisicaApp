@@ -1,13 +1,45 @@
 import streamlit as st
 
 
-def show():
-    st.sidebar.image(
-        "assets/GeofisicaApp_beta.png", use_container_width=True, output_format="PNG"
-    )
-    st.sidebar.link_button(
-        "Retornar ao GeofisicaHub",
-        url="https://geofisicahub.me/",
-        icon=":material/arrow_back:",
-        type="primary",
-    )
+def get_pages():
+    pages = {
+        "Home": [
+            st.Page("pages/Home.py", title="Home", icon=":material/home:")
+        ],
+        "Geophysics": [
+            st.Page(
+                "pages/1_GeofisicaCode.py",
+                title="GeofisicaCode",
+                icon=":material/code:",
+            ),
+            st.Page(
+                "pages/8_SeisHub.py", title="Seismic", icon=":material/waves:"
+            ),
+        ],
+        "Geology & Minerals": [
+            st.Page(
+                "pages/2_GeologiHub.py", title="GeologiHub", icon=":material/landscape:"
+            ),
+            st.Page(
+                "pages/3_MineralHub.py", title="MineralHub", icon=":material/diamond:"
+            ),
+            st.Page(
+                "pages/4_PetrofisicaHub.py",
+                title="PetrofisicaHub",
+                icon=":material/layers:",
+            ),
+        ],
+        "Tools & Analysis": [
+            st.Page(
+                "pages/5_CalcHub.py", title="Calculus", icon=":material/calculate:"
+            ),
+            st.Page(
+                "pages/6_FisicaHub.py", title="FisicaHub", icon=":material/science:"
+            ),
+            st.Page(
+                "pages/7_ToolsHub.py", title="Tools", icon=":material/build:"
+            ),
+        ],
+    }
+
+    return pages

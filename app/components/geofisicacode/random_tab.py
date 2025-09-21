@@ -114,7 +114,7 @@ y = random.choice('abcdef')
 print(y)        # example: {y}
             """,
         )
-        if st.button("Test the `choice` method", use_container_width=True):
+        if st.button("Test the `choice` method", width="stretch"):
             x = random.choice(["win", "lose", "draw"])
             st.write(f"Choice between `win`, `lose` and `draw`: `{x}`")
 
@@ -141,4 +141,3 @@ s = random.sample([10, 20, 30, 40, 50], k=4)
 print(s)        # example: {s}
             """,
         )
-

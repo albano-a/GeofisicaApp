@@ -1,5 +1,5 @@
 import streamlit as st
-import components.sidebar as sidebar
+
 
 
 def render_header(
@@ -12,7 +12,6 @@ def render_header(
         page_title=page_title, page_icon=page_icon, layout=layout, menu_items=menu_items
     )
 
-    sidebar.show()
 
     # hide_streamlit_style = """
     #         <style>
