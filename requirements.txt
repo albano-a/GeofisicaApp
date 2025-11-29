@@ -13,3 +13,4 @@ scipy
 RestrictedPython
 streamlit-ace
 qrcode
+polars
