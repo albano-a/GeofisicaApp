@@ -1,6 +1,4 @@
 import streamlit as st  # type: ignore
-from components.header import render_header
-import components.sidebar as sidebar
 
 GEOFISICACODE = "pages/1_GeofisicaCode.py"
 GEOLOGIHUB = "pages/2_GeologiHub.py"
@@ -13,6 +11,7 @@ PAGE_LABEL = "Acessar aplicativo :material/arrow_right_alt:"
 
 st.image("assets/GeofisicaApp_beta.png", width="stretch")
 st.toast("We are working to launch this site soon.", icon="🚧", duration="infinite")
+
 
 st.write(
     """
